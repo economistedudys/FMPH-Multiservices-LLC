@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FMPH Multiservices LLC — Bookkeeping, Call Center &amp; Multilingual Support</title>
+<meta name="description" content="FMPH Multiservices LLC provides QBOA bookkeeping, call center, sales, healthcare support, and interpretation services for growing businesses.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141B1E;
+    --ink-soft:#51605F;
+    --paper:#FFFFFF;
+    --paper-raised:#F5F7F7;
+    --line:#DDE3E2;
+    --ledger:#0E7C6B;
+    --ledger-deep:#0A5C4F;
+    --amber:#D9673F;
+    --white:#FFFFFF;
+    --radius:2px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color:var(--ink);
+    margin:0;
+    line-height:1.08;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ledger);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--ledger);
+    box-shadow:0 0 0 3px rgba(14,124,107,.2);
+    flex:none;
+  }
+  ::selection{background:var(--ink); color:var(--paper-raised);}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--ledger);
+    outline-offset:3px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    display:flex; flex-direction:row; align-items:center; gap:10px; text-decoration:none;
+  }
+  .logo-icon{height:34px; width:auto; display:block; flex:none;}
+  .logo-text{display:flex; flex-direction:column; line-height:1; gap:3px;}
+  .logo .mark{font-family:'Fraunces', serif; font-weight:700; font-size:22px; letter-spacing:.01em; color:var(--ink);}
+  .logo .sub{font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ledger);}
+  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links a{
+    text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink-soft);
+    padding:4px 2px; border-bottom:1px solid transparent; transition:.2s;
+  }
+  nav.links a:hover{color:var(--ledger-deep); border-bottom-color:var(--ledger);}
+  .btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600; font-size:14px;
+    padding:11px 22px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    cursor:pointer; border:1px solid transparent;
+    transition:.2s;
+  }
+  .btn-primary{background:var(--ledger); color:var(--white);}
+  .btn-primary:hover{background:var(--ledger-deep);}
+  .btn-ghost{border-color:var(--ink); color:var(--ink); background:transparent;}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .navbtn{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .navbtn span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 64px; overflow:hidden;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;
+  }
+  .hero h1{font-size:clamp(34px,4.6vw,58px); margin:18px 0 22px;}
+  .hero h1 em{font-style:italic; color:var(--ledger);}
+  .hero p.lead{font-size:18px; color:var(--ink-soft); max-width:46ch; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  .ledger-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 22px 50px -22px rgba(20,27,30,.28);
+  }
+  .ledger-card .lc-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 18px; border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  .lc-head .dots{display:flex; gap:6px;}
+  .lc-head .dots span{width:7px; height:7px; border-radius:50%; background:var(--line);}
+  #ticker{list-style:none; margin:0; padding:10px 0; min-height:268px;}
+  #ticker li{
+    display:grid; grid-template-columns:64px 1fr auto; gap:12px; align-items:baseline;
+    padding:11px 18px; font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    opacity:0; transform:translateY(6px);
+    animation:rowIn .5s ease forwards;
+    border-bottom:1px dashed var(--line);
+  }
+  #ticker li:last-child{border-bottom:none;}
+  #ticker li .t-time{color:var(--ink-soft);}
+  #ticker li .t-desc{color:var(--ink); font-family:'IBM Plex Sans', sans-serif; font-size:13.5px;}
+  #ticker li .t-tag{
+    font-size:10px; letter-spacing:.08em; padding:3px 7px; border-radius:20px;
+    background:rgba(14,124,107,.14); color:var(--ledger-deep); white-space:nowrap; height:fit-content;
+  }
+  @keyframes rowIn{to{opacity:1; transform:translateY(0);}}
+
+  .marquee-strip{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--ink); color:var(--paper); overflow:hidden; padding:13px 0;
+  }
+  .marquee-strip .track{display:flex; width:max-content; animation:scroll 32s linear infinite;}
+  .marquee-strip .track span{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.05em;
+    padding:0 28px; white-space:nowrap; color:#BFEAE1; display:flex; align-items:center; gap:10px;
+  }
+  .marquee-strip .track span::before{content:"•"; color:var(--ledger);}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-top:14px;}
+  .section-head p{color:var(--ink-soft); font-size:16.5px; margin-top:14px;}
+
+  /* ---------- SERVICES LEDGER ---------- */
+  .ledger{border-top:1px solid var(--ink);}
+  .ledger-row{
+    border-bottom:1px solid var(--line);
+    padding:30px 0;
+    display:grid; grid-template-columns:110px 1fr; gap:28px;
+    cursor:pointer;
+  }
+  .ledger-row .code{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ledger);
+    padding-top:6px; letter-spacing:.04em;
+  }
+  .ledger-row .row-main{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start;}
+  .ledger-row h3{font-size:24px; font-weight:600;}
+  .ledger-row .row-sub{color:var(--ink-soft); margin-top:8px; max-width:56ch; font-size:15px;}
+  .ledger-row .chev{
+    font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--ink-soft);
+    transition:transform .3s; padding-top:2px;
+  }
+  .ledger-row.open .chev{transform:rotate(45deg); color:var(--ledger);}
+  .row-detail{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    grid-column:1/-1;
+  }
+  .ledger-row.open .row-detail{max-height:220px;}
+  .row-detail-inner{
+    display:flex; flex-wrap:wrap; gap:10px 28px; padding-top:20px; margin-left:0;
+  }
+  .row-detail-inner div{
+    font-size:14px; color:var(--ink); display:flex; gap:8px; align-items:baseline;
+  }
+  .row-detail-inner div::before{content:"—"; color:var(--amber); font-weight:600;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);}
+  .step{padding:36px 30px; border-right:1px solid var(--line);}
+  .step:last-child{border-right:none;}
+  .step .num{font-family:'IBM Plex Mono', monospace; color:var(--ledger); font-size:13px; letter-spacing:.08em;}
+  .step h3{font-size:21px; margin:16px 0 10px;}
+  .step p{color:var(--ink-soft); font-size:14.5px; margin:0;}
+
+  /* ---------- INDUSTRIES ---------- */
+  .chips{display:flex; flex-wrap:wrap; gap:12px;}
+  .chip{
+    border:1px solid var(--ink); border-radius:30px; padding:10px 20px;
+    font-size:14px; font-weight:500; background:var(--paper-raised);
+  }
+
+  /* ---------- WHY GRID ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .why-cell{background:var(--paper-raised); padding:34px 26px;}
+  .why-cell .wnum{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ledger-deep); letter-spacing:.08em;}
+  .why-cell h3{font-size:18px; margin:14px 0 10px;}
+  .why-cell p{font-size:14px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background:var(--ink); color:var(--paper);
+    border-radius:var(--radius);
+    padding:56px 48px;
+    display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap;
+  }
+  .cta-banner h2{color:var(--white); font-size:clamp(24px,3vw,34px); max-width:14ch;}
+  .cta-banner .btn-primary{background:var(--ledger); color:var(--ink); border-color:var(--ledger);}
+  .cta-banner .btn-primary:hover{background:var(--ledger-deep); color:var(--white);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr .8fr; gap:56px;}
+  form{display:grid; gap:16px;}
+  .field{display:grid; gap:6px;}
+  .field label{font-size:13px; font-family:'IBM Plex Mono', monospace; letter-spacing:.04em; color:var(--ink-soft);}
+  .field input, .field select, .field textarea{
+    font-family:'IBM Plex Sans', sans-serif; font-size:15px;
+    border:1px solid var(--line); background:var(--paper-raised);
+    padding:12px 14px; border-radius:var(--radius); color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:110px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  form .btn-primary{justify-self:start; margin-top:6px; border:none;}
+
+  .info-card{background:var(--ink); color:var(--paper); padding:36px; border-radius:var(--radius);}
+  .info-card .eyebrow{color:#6FE0C7;}
+  .info-card .eyebrow::before{background:var(--ledger); box-shadow:0 0 0 3px rgba(14,124,107,.3);}
+  .info-card h3{color:var(--white); font-size:22px; margin:14px 0 22px;}
+  .info-line{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.14); font-size:14.5px;}
+  .info-line span:first-child{color:#8FD9C9; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.06em;}
+  .info-line span:last-child{text-align:right;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--ink); padding:44px 0 30px;}
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
+  footer .logo .mark{font-size:19px;}
+  .foot-links{display:flex; gap:26px; flex-wrap:wrap;}
+  .foot-links a{font-size:13.5px; text-decoration:none; color:var(--ink-soft);}
+  .foot-bottom{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+    .navbtn{display:block;}
+    .steps{grid-template-columns:1fr;}
+    .step{border-right:none; border-bottom:1px solid var(--line);}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .row2{grid-template-columns:1fr;}
+    .ledger-row{grid-template-columns:1fr;}
+    .ledger-row .code{padding-top:0;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .why-grid{grid-template-columns:1fr;}
+    .cta-banner{padding:38px 26px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo">
+      <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#industries">Industries</a>
+      <a href="#why">Why FMPH</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="#contact" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="#how" style="padding:12px 0; border-bottom:1px solid var(--line);">How it works</a>
+    <a href="#industries" style="padding:12px 0; border-bottom:1px solid var(--line);">Industries</a>
+    <a href="#why" style="padding:12px 0; border-bottom:1px solid var(--line);">Why FMPH</a>
+    <a href="#contact" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:64px;">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Bookkeeping · Call Center · Multilingual Support</span>
+        <h1>Your books balanced.<br>Your phones <em>answered.</em><br>One team.</h1>
+        <p class="lead">FMPH Multiservices LLC handles the back office and the front line for growing businesses — QBOA-supported bookkeeping paired with bilingual call center, sales, healthcare, and interpretation services.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Request a consultation</a>
+          <a href="#services" class="btn btn-ghost">See all services</a>
+        </div>
+      </div>
+
+      <div class="ledger-card">
+        <div class="lc-head">
+          <span>Live activity log</span>
+          <span class="dots"><span></span><span></span><span></span></span>
+        </div>
+        <ul id="ticker"></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Six lines of service. One point of contact.</h2>
+        <p>Every engagement is entered, tracked, and handled the way it belongs on a ledger — clearly coded, clearly accounted for. Tap a line to see what's included.</p>
+      </div>
+
+      <div class="ledger reveal" id="ledgerList">
+        <!-- rows injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Getting started</span>
+        <h2>Onboarding in three steps</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <span class="num">STEP 01</span>
+          <h3>Consult</h3>
+          <p>We review your books, your call volume, and where things are slipping — and scope exactly which services you need.</p>
+        </div>
+        <div class="step">
+          <span class="num">STEP 02</span>
+          <h3>Configure</h3>
+          <p>We set up your QuickBooks Online workflow and/or train your dedicated agents on your scripts, tools, and tone.</p>
+        </div>
+        <div class="step">
+          <span class="num">STEP 03</span>
+          <h3>Go live</h3>
+          <p>Your books stay current and your calls get answered — with a monthly report so you always know where things stand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section id="industries" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Who we work with</span>
+        <h2>Built for teams that can't afford to miss a call — or a reconciliation</h2>
+      </div>
+      <div class="chips reveal">
+        <span class="chip">Small &amp; family-owned businesses</span>
+        <span class="chip">Medical &amp; dental practices</span>
+        <span class="chip">Home services &amp; contractors</span>
+        <span class="chip">Retail &amp; e-commerce</span>
+        <span class="chip">Legal offices</span>
+        <span class="chip">Insurance agencies</span>
+        <span class="chip">Nonprofits &amp; community organizations</span>
+        <span class="chip">Startups &amp; solo founders</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why FMPH</span>
+        <h2>Four things clients tell us matter most</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-cell">
+          <span class="wnum">01</span>
+          <h3>Bilingual by default</h3>
+          <p>Agents fluent in English, Spanish, French, and Haitian Creole — no client gets put on hold for a language gap.</p>
+        </div>
+        <div class="why-cell">
+          <span class="wnum">02</span>
+          <h3>QBOA-supported books</h3>
+          <p>Bookkeeping built around QuickBooks Online, kept audit-ready and tax-season-ready all year.</p>
+        </div>
+        <div class="why-cell">
+          <span class="wnum">03</span>
+          <h3>Scales with you</h3>
+          <p>Add an agent for a busy season or scale back in the slow months — no long-term overstaffing.</p>
+        </div>
+        <div class="why-cell">
+          <span class="wnum">04</span>
+          <h3>One account manager</h3>
+          <p>A single point of contact across every service line, so nothing falls between departments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="cta-banner reveal">
+        <h2>Let's put your books in order and your phones in good hands.</h2>
+        <a href="#contact" class="btn btn-primary">Request a consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Tell us what you need handled</h2>
+        <p>Fill out the form and a member of the FMPH team will follow up within one business day.</p>
+      </div>
+
+      <div class="contact-grid reveal">
+        <form id="contactForm">
+          <div class="row2">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" type="text" placeholder="Your business name">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@company.com" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" type="tel" placeholder="(000) 000-0000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="service">Service you're interested in</label>
+            <select id="service">
+              <option>Bookkeeping (QBOA)</option>
+              <option>Call Center</option>
+              <option>Sales</option>
+              <option>Healthcare Support</option>
+              <option>Interpretation</option>
+              <option>Other / Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="A few details about what you need help with..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send request</button>
+        </form>
+
+        <div class="info-card">
+          <span class="eyebrow">Contact card</span>
+          <h3>FMPH Multiservices LLC</h3>
+          <div class="info-line"><span>EMAIL</span><span>joanapierre978@gmail.com</span></div>
+          <div class="info-line"><span>PHONE</span><span>+1 (713) 471-7656</span></div>
+          <div class="info-line"><span>HOURS</span><span>Mon–Fri, 9:00 AM–6:00 PM</span></div>
+          <div class="info-line"><span>SERVICE AREA</span><span>Remote &amp; nationwide (US)</span></div>
+          <div class="info-line" style="border-bottom:none;"><span>LANGUAGES</span><span>EN · ES · FR · Haitian Creole</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="#top" class="logo">
+        <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#industries">Industries</a>
+        <a href="#why">Why FMPH</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.style.display === 'flex';
+    mobileNav.style.display = isOpen ? 'none' : 'flex';
+    navToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.style.display = 'none'; }));
+
+  // Services ledger data
+  const services = [
+    {
+      code: 'BK — 01',
+      title: 'Bookkeeping Services',
+      sub: 'QBOA-supported bookkeeping that keeps your books current, reconciled, and ready for tax time — every month, not just at year-end.',
+      items: ['Bank & credit card reconciliation', 'Invoicing & accounts receivable', 'Accounts payable & bill pay', 'Monthly financial reports', 'Payroll support', 'QuickBooks Online setup & cleanup']
+    },
+    {
+      code: 'CC — 02',
+      title: 'Call Center Services',
+      sub: 'Inbound and outbound support handled by trained, bilingual agents who represent your business the way you would.',
+      items: ['Inbound customer support', 'Appointment scheduling', 'Order & inquiry handling', 'After-hours & overflow coverage', 'Outbound follow-up calls', 'Live call reporting']
+    },
+    {
+      code: 'SL — 03',
+      title: 'Sales',
+      sub: 'Outbound calling and lead follow-up to keep your pipeline moving without adding to your own team\'s workload.',
+      items: ['Outbound lead generation', 'Cold & warm calling', 'Appointment setting', 'Upselling & cross-selling', 'CRM data entry & updates', 'Sales call scripting']
+    },
+    {
+      code: 'HC — 04',
+      title: 'Healthcare Support',
+      sub: 'Answering and administrative support built around the pace of a medical office, with care taken on every patient interaction.',
+      items: ['Patient appointment scheduling', 'Medical answering service', 'Patient intake calls', 'Insurance verification support', 'Prescription refill requests', 'Bilingual patient communication']
+    },
+    {
+      code: 'IN — 05',
+      title: 'Interpretation',
+      sub: 'Over-the-phone interpretation so language is never the reason a client, patient, or customer goes unheard.',
+      items: ['English ⇄ Spanish', 'English ⇄ French', 'English ⇄ Haitian Creole', 'Medical interpretation', 'Business & legal interpretation', 'On-demand & scheduled sessions']
+    },
+    {
+      code: 'XS — 06',
+      title: 'Additional Services',
+      sub: 'Back-office and support tasks that don\'t fit neatly in one line item — tell us what you need and we\'ll scope it.',
+      items: ['Virtual assistance', 'Data entry & back-office support', 'Customer retention calls', 'Email & chat support', 'Custom reporting', 'Ask us about your specific need']
+    }
+  ];
+
+  const ledgerList = document.getElementById('ledgerList');
+  services.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'ledger-row';
+    row.innerHTML = `
+      <div class="code">${s.code}</div>
+      <div class="row-main">
+        <div>
+          <h3>${s.title}</h3>
+          <p class="row-sub">${s.sub}</p>
+        </div>
+        <div class="chev">+</div>
+      </div>
+      <div class="row-detail">
+        <div class="row-detail-inner">
+          ${s.items.map(it => `<div>${it}</div>`).join('')}
+        </div>
+      </div>
+    `;
+    row.addEventListener('click', () => {
+      const wasOpen = row.classList.contains('open');
+      document.querySelectorAll('.ledger-row').forEach(r => r.classList.remove('open'));
+      if (!wasOpen) row.classList.add('open');
+    });
+    ledgerList.appendChild(row);
+  });
+
+  // Marquee strip
+  const marqueeItems = [
+    'QBOA-supported bookkeeping', 'Bilingual agents · EN / ES / FR / Haitian Creole',
+    'HIPAA-conscious healthcare support', 'Flexible, scalable teams',
+    'Dedicated account manager', 'Nationwide remote coverage'
+  ];
+  const track = document.getElementById('marqueeTrack');
+  const doubled = [...marqueeItems, ...marqueeItems];
+  track.innerHTML = doubled.map(t => `<span>${t}</span>`).join('');
+
+  // Hero ticker
+  const tickerData = [
+    { time: '09:14', tag: 'CC-02', desc: 'Inbound call answered — Miami, FL' },
+    { time: '09:21', tag: 'BK-01', desc: 'Bank account reconciled — 42 transactions' },
+    { time: '09:33', tag: 'IN-05', desc: 'Interpretation session — Spanish ⇄ English' },
+    { time: '09:47', tag: 'HC-04', desc: 'Patient appointment confirmed' },
+    { time: '10:02', tag: 'SL-03', desc: 'Outbound follow-up call completed' },
+    { time: '10:15', tag: 'BK-01', desc: 'Invoice sent — Net 30 terms' },
+    { time: '10:28', tag: 'CC-02', desc: 'After-hours voicemail routed & returned' },
+    { time: '10:40', tag: 'IN-05', desc: 'Interpretation session — Haitian Creole ⇄ English' },
+  ];
+  const tickerEl = document.getElementById('ticker');
+  let idx = 0;
+  const maxRows = 6;
+
+  function pushRow(){
+    const d = tickerData[idx % tickerData.length];
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="t-time">${d.time}</span><span class="t-desc">${d.desc}</span><span class="t-tag">${d.tag}</span>`;
+    tickerEl.appendChild(li);
+    if (tickerEl.children.length > maxRows) tickerEl.removeChild(tickerEl.children[0]);
+    idx++;
+  }
+  for (let i = 0; i < maxRows; i++) pushRow();
+  setInterval(pushRow, 2600);
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Contact form (static demo — no backend wired up)
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = 'Request sent ✓';
+    btn.style.background = 'var(--ledger-deep)';
+    setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
+  });
+</script>
+
+</body>
+</html>
