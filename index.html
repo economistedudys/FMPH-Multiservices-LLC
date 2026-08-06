@@ -3,389 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FMPH Multiservices LLC — Bookkeeping, Call Center &amp; Multilingual Support</title>
+<title>FMPH Multiservices LLC — Bookkeeping, Call Center & Multilingual Support</title>
 <meta name="description" content="FMPH Multiservices LLC provides QBOA bookkeeping, call center, sales, healthcare support, and interpretation services for growing businesses.">
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#141B1E;
-    --ink-soft:#51605F;
-    --paper:#FFFFFF;
-    --paper-raised:#F5F7F7;
-    --line:#DDE3E2;
-    --ledger:#0E7C6B;
-    --ledger-deep:#0A5C4F;
-    --amber:#D9673F;
-    --white:#FFFFFF;
-    --radius:2px;
-    --maxw:1180px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    color:var(--ink);
-    margin:0;
-    line-height:1.08;
-    font-weight:600;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--ledger);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:7px;height:7px;border-radius:50%;
-    background:var(--ledger);
-    box-shadow:0 0 0 3px rgba(14,124,107,.2);
-    flex:none;
-  }
-  ::selection{background:var(--ink); color:var(--paper-raised);}
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
-    outline:2px solid var(--ledger);
-    outline-offset:3px;
-  }
-
-  /* ---------- HEADER ---------- */
-  header{
-    position:sticky; top:0; z-index:100;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 32px;
-    max-width:var(--maxw); margin:0 auto;
-  }
-  .logo{
-    display:flex; flex-direction:row; align-items:center; gap:10px; text-decoration:none;
-  }
-  .logo-icon{height:34px; width:auto; display:block; flex:none;}
-  .logo-text{display:flex; flex-direction:column; line-height:1; gap:3px;}
-  .logo .mark{font-family:'Fraunces', serif; font-weight:700; font-size:22px; letter-spacing:.01em; color:var(--ink);}
-  .logo .sub{font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ledger);}
-  nav.links{display:flex; gap:22px; align-items:center;}
-  nav.links a{
-    text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink-soft);
-    padding:4px 2px; border-bottom:1px solid transparent; transition:.2s;
-  }
-  nav.links a:hover{color:var(--ledger-deep); border-bottom-color:var(--ledger);}
-  .btn{
-    font-family:'IBM Plex Sans', sans-serif;
-    font-weight:600; font-size:14px;
-    padding:11px 22px;
-    border-radius:var(--radius);
-    text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px;
-    cursor:pointer; border:1px solid transparent;
-    transition:.2s;
-  }
-  .btn-primary{background:var(--ledger); color:var(--white);}
-  .btn-primary:hover{background:var(--ledger-deep);}
-  .btn-ghost{border-color:var(--ink); color:var(--ink); background:transparent;}
-  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
-  .navbtn{display:none; background:none; border:none; cursor:pointer; padding:6px;}
-  .navbtn span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
-
-  /* ---------- HERO ---------- */
-  .hero{padding:88px 0 64px; overflow:hidden;}
-  .hero-grid{
-    display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;
-  }
-  .hero h1{font-size:clamp(34px,4.6vw,58px); margin:18px 0 22px;}
-  .hero h1 em{font-style:italic; color:var(--ledger);}
-  .hero p.lead{font-size:18px; color:var(--ink-soft); max-width:46ch; margin-bottom:32px;}
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
-
-  .ledger-card{
-    background:var(--paper-raised);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:0 22px 50px -22px rgba(20,27,30,.28);
-  }
-  .ledger-card .lc-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:14px 18px; border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.08em;
-    text-transform:uppercase; color:var(--ink-soft);
-  }
-  .lc-head .dots{display:flex; gap:6px;}
-  .lc-head .dots span{width:7px; height:7px; border-radius:50%; background:var(--line);}
-  #ticker{list-style:none; margin:0; padding:10px 0; min-height:268px;}
-  #ticker li{
-    display:grid; grid-template-columns:64px 1fr auto; gap:12px; align-items:baseline;
-    padding:11px 18px; font-family:'IBM Plex Mono', monospace; font-size:12.5px;
-    opacity:0; transform:translateY(6px);
-    animation:rowIn .5s ease forwards;
-    border-bottom:1px dashed var(--line);
-  }
-  #ticker li:last-child{border-bottom:none;}
-  #ticker li .t-time{color:var(--ink-soft);}
-  #ticker li .t-desc{color:var(--ink); font-family:'IBM Plex Sans', sans-serif; font-size:13.5px;}
-  #ticker li .t-tag{
-    font-size:10px; letter-spacing:.08em; padding:3px 7px; border-radius:20px;
-    background:rgba(14,124,107,.14); color:var(--ledger-deep); white-space:nowrap; height:fit-content;
-  }
-  @keyframes rowIn{to{opacity:1; transform:translateY(0);}}
-
-  .marquee-strip{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    background:var(--ink); color:var(--paper); overflow:hidden; padding:13px 0;
-  }
-  .marquee-strip .track{display:flex; width:max-content; animation:scroll 32s linear infinite;}
-  .marquee-strip .track span{
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.05em;
-    padding:0 28px; white-space:nowrap; color:#BFEAE1; display:flex; align-items:center; gap:10px;
-  }
-  .marquee-strip .track span::before{content:"•"; color:var(--ledger);}
-  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
-
-  /* ---------- SECTION SHARED ---------- */
-  section{padding:96px 0;}
-  .section-head{max-width:640px; margin-bottom:52px;}
-  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-top:14px;}
-  .section-head p{color:var(--ink-soft); font-size:16.5px; margin-top:14px;}
-
-  /* ---------- SERVICES LEDGER ---------- */
-  .ledger{border-top:1px solid var(--ink);}
-  .ledger-row{
-    border-bottom:1px solid var(--line);
-    padding:30px 0;
-    display:grid; grid-template-columns:110px 1fr; gap:28px;
-    cursor:pointer;
-  }
-  .ledger-row .code{
-    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ledger);
-    padding-top:6px; letter-spacing:.04em;
-  }
-  .ledger-row .row-main{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start;}
-  .ledger-row h3{font-size:24px; font-weight:600;}
-  .ledger-row .row-sub{color:var(--ink-soft); margin-top:8px; max-width:56ch; font-size:15px;}
-  .ledger-row .chev{
-    font-family:'IBM Plex Mono', monospace; font-size:20px; color:var(--ink-soft);
-    transition:transform .3s; padding-top:2px;
-  }
-  .ledger-row.open .chev{transform:rotate(45deg); color:var(--ledger);}
-  .row-detail{
-    max-height:0; overflow:hidden; transition:max-height .35s ease;
-    grid-column:1/-1;
-  }
-  .ledger-row.open .row-detail{max-height:220px;}
-  .row-detail-inner{
-    display:flex; flex-wrap:wrap; gap:10px 28px; padding-top:20px; margin-left:0;
-  }
-  .row-detail-inner div{
-    font-size:14px; color:var(--ink); display:flex; gap:8px; align-items:baseline;
-  }
-  .row-detail-inner div::before{content:"—"; color:var(--amber); font-weight:600;}
-
-  /* ---------- HOW IT WORKS ---------- */
-  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);}
-  .step{padding:36px 30px; border-right:1px solid var(--line);}
-  .step:last-child{border-right:none;}
-  .step .num{font-family:'IBM Plex Mono', monospace; color:var(--ledger); font-size:13px; letter-spacing:.08em;}
-  .step h3{font-size:21px; margin:16px 0 10px;}
-  .step p{color:var(--ink-soft); font-size:14.5px; margin:0;}
-
-  /* ---------- INDUSTRIES ---------- */
-  .chips{display:flex; flex-wrap:wrap; gap:12px;}
-  .chip{
-    border:1px solid var(--ink); border-radius:30px; padding:10px 20px;
-    font-size:14px; font-weight:500; background:var(--paper-raised);
-  }
-
-  /* ---------- WHY GRID ---------- */
-  .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .why-cell{background:var(--paper-raised); padding:34px 26px;}
-  .why-cell .wnum{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ledger-deep); letter-spacing:.08em;}
-  .why-cell h3{font-size:18px; margin:14px 0 10px;}
-  .why-cell p{font-size:14px; color:var(--ink-soft); margin:0;}
-
-  /* ---------- CTA BANNER ---------- */
-  .cta-banner{
-    background:var(--ink); color:var(--paper);
-    border-radius:var(--radius);
-    padding:56px 48px;
-    display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap;
-  }
-  .cta-banner h2{color:var(--white); font-size:clamp(24px,3vw,34px); max-width:14ch;}
-  .cta-banner .btn-primary{background:var(--ledger); color:var(--ink); border-color:var(--ledger);}
-  .cta-banner .btn-primary:hover{background:var(--ledger-deep); color:var(--white);}
-
-  /* ---------- CONTACT ---------- */
-  .contact-grid{display:grid; grid-template-columns:1fr .8fr; gap:56px;}
-  form{display:grid; gap:16px;}
-  .field{display:grid; gap:6px;}
-  .field label{font-size:13px; font-family:'IBM Plex Mono', monospace; letter-spacing:.04em; color:var(--ink-soft);}
-  .field input, .field select, .field textarea{
-    font-family:'IBM Plex Sans', sans-serif; font-size:15px;
-    border:1px solid var(--line); background:var(--paper-raised);
-    padding:12px 14px; border-radius:var(--radius); color:var(--ink);
-  }
-  .field textarea{resize:vertical; min-height:110px;}
-  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  form .btn-primary{justify-self:start; margin-top:6px; border:none;}
-
-  .info-card{background:var(--ink); color:var(--paper); padding:36px; border-radius:var(--radius);}
-  .info-card .eyebrow{color:#6FE0C7;}
-  .info-card .eyebrow::before{background:var(--ledger); box-shadow:0 0 0 3px rgba(14,124,107,.3);}
-  .info-card h3{color:var(--white); font-size:22px; margin:14px 0 22px;}
-  .info-line{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.14); font-size:14.5px;}
-  .info-line span:first-child{color:#8FD9C9; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.06em;}
-  .info-line span:last-child{text-align:right;}
-
-  /* ---------- FOOTER ---------- */
-  footer{border-top:1px solid var(--ink); padding:44px 0 30px;}
-  .foot-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
-  footer .logo .mark{font-size:19px;}
-  .foot-links{display:flex; gap:26px; flex-wrap:wrap;}
-  .foot-links a{font-size:13.5px; text-decoration:none; color:var(--ink-soft);}
-  .foot-bottom{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace;}
-
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
-  .about-photo img{width:100%; height:100%; object-fit:cover; border-radius:var(--radius); display:block; aspect-ratio:4/5;}
-  .about-stats{display:flex; gap:28px; margin-top:28px; flex-wrap:wrap;}
-  .about-stats div{border-left:2px solid var(--ledger); padding-left:14px;}
-  .about-stats .stat-num{font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:var(--ink); display:block;}
-  .about-stats .stat-label{font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; letter-spacing:.05em;}
-
-  /* ---------- WORLDWIDE BANNER ---------- */
-  .worldwide-banner{
-    position:relative; border-radius:var(--radius); overflow:hidden; min-height:280px;
-    display:flex; align-items:center; margin-bottom:52px;
-  }
-  .worldwide-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
-  .worldwide-banner::after{content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(20,27,30,.88) 0%, rgba(20,27,30,.55) 55%, rgba(20,27,30,.22) 100%);}
-  .worldwide-content{position:relative; z-index:1; padding:44px 48px; color:#fff; max-width:560px;}
-  .worldwide-content .eyebrow{color:#8FEFDB;}
-  .worldwide-content .eyebrow::before{background:#8FEFDB; box-shadow:0 0 0 3px rgba(143,239,219,.25);}
-  .worldwide-content h3{color:#fff; font-size:clamp(22px,2.6vw,30px); margin:14px 0 12px;}
-  .worldwide-content p{color:#DCEAE7; font-size:15px; margin:0;}
-
-  /* ---------- TALENT CATEGORIES ---------- */
-  .talent-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
-  .talent-card{
-    position:relative; border-radius:var(--radius); overflow:hidden; cursor:pointer;
-    aspect-ratio:4/3; border:1px solid var(--line); transition:transform .25s, outline-color .2s;
-  }
-  .talent-card:hover{transform:translateY(-4px);}
-  .talent-card img{width:100%; height:100%; object-fit:cover; display:block;}
-  .talent-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,27,30,0) 35%, rgba(20,27,30,.85) 100%);}
-  .talent-card .talent-info{position:absolute; left:0; right:0; bottom:0; z-index:1; padding:18px; color:#fff;}
-  .talent-card .talent-code{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#8FEFDB;}
-  .talent-card h3{color:#fff; font-size:19px; margin:6px 0 4px;}
-  .talent-card .talent-count{font-size:12.5px; color:#DCEAE7;}
-  .talent-card.active{outline:2px solid var(--ledger); outline-offset:2px;}
-
-  /* ---------- CAREERS ---------- */
-  .career-toolbar{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:32px;}
-  .career-filter-label{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); display:flex; align-items:center; gap:10px;}
-  .career-filter-label button{
-    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ledger); background:none; border:1px solid var(--ledger);
-    padding:4px 10px; border-radius:20px; cursor:pointer;
-  }
-  .badge-worldwide{
-    display:inline-flex; align-items:center; gap:6px; font-size:12px; font-family:'IBM Plex Mono',monospace;
-    border:1px solid var(--line); background:var(--paper-raised); padding:5px 11px; border-radius:20px; color:var(--ink-soft);
-  }
-  .career-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .job-card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; background:var(--paper-raised);}
-  .job-card img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block;}
-  .job-card .job-body{padding:20px; display:flex; flex-direction:column; gap:10px; flex:1;}
-  .job-card .job-dept{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--ledger-deep); text-transform:uppercase;}
-  .job-card h3{font-size:19px;}
-  .job-card .job-meta{display:flex; gap:8px; flex-wrap:wrap;}
-  .job-card p.job-blurb{font-size:13.5px; color:var(--ink-soft); margin:0; flex:1;}
-  .job-card .btn{margin-top:6px; align-self:flex-start; padding:9px 18px; font-size:13px;}
-  .career-empty{display:none; padding:40px; text-align:center; color:var(--ink-soft); border:1px dashed var(--line); border-radius:var(--radius);}
-
-  /* ---------- BLOG ---------- */
-  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .blog-card{display:flex; flex-direction:column; gap:14px;}
-  .blog-card img{width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius); display:block;}
-  .blog-card .blog-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--ledger-deep); text-transform:uppercase;}
-  .blog-card h3{font-size:19px;}
-  .blog-card p{font-size:14px; color:var(--ink-soft); margin:0;}
-  .blog-card .blog-meta{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft); display:flex; justify-content:space-between; align-items:center;}
-  .blog-card .blog-meta a{color:var(--ledger); text-decoration:none; font-weight:600;}
-
-  /* ---------- MY PROFILE ---------- */
-  .profile-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
-  .profile-photo img{width:100%; height:100%; object-fit:cover; border-radius:var(--radius); display:block; aspect-ratio:4/5;}
-  .profile-tabs{display:flex; gap:4px; margin-bottom:24px; border:1px solid var(--line); border-radius:var(--radius); padding:4px; width:fit-content;}
-  .profile-tab{
-    font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; font-weight:600; padding:9px 18px;
-    border:none; background:transparent; color:var(--ink-soft); cursor:pointer; border-radius:var(--radius); transition:.2s;
-  }
-  .profile-tab.active{background:var(--ink); color:var(--paper);}
-  .profile-form{display:none;}
-  .profile-form.active{display:grid;}
-  .profile-note{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
-
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;}
-    nav.links{display:none;}
-    .navbtn{display:block;}
-    .steps{grid-template-columns:1fr;}
-    .step{border-right:none; border-bottom:1px solid var(--line);}
-    .why-grid{grid-template-columns:1fr 1fr;}
-    .contact-grid{grid-template-columns:1fr;}
-    .row2{grid-template-columns:1fr;}
-    .ledger-row{grid-template-columns:1fr;}
-    .ledger-row .code{padding-top:0;}
-    .about-grid{grid-template-columns:1fr;}
-    .talent-grid{grid-template-columns:1fr 1fr;}
-    .career-grid{grid-template-columns:1fr 1fr;}
-    .blog-grid{grid-template-columns:1fr 1fr;}
-    .profile-grid{grid-template-columns:1fr;}
-  }
-  @media (max-width:560px){
-    .wrap{padding:0 20px;}
-    .why-grid{grid-template-columns:1fr;}
-    .cta-banner{padding:38px 26px;}
-    .talent-grid{grid-template-columns:1fr;}
-    .career-grid{grid-template-columns:1fr;}
-    .blog-grid{grid-template-columns:1fr;}
-    .worldwide-content{padding:30px 24px;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
-    html{scroll-behavior:auto;}
-  }
-</style>
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <a href="#top" class="logo">
+    <a href="index.html" class="logo">
       <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
       <span class="logo-text">
         <span class="mark">FMPH</span>
@@ -393,27 +23,27 @@
       </span>
     </a>
     <nav class="links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#talent">Join Our Talent</a>
-      <a href="#careers">Careers</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div style="display:flex; align-items:center; gap:12px;">
-      <a href="#profile" class="btn btn-ghost">My Profile</a>
-      <a href="#contact" class="btn btn-primary">Request a consultation</a>
+      <a href="my-profile.html" class="btn btn-ghost">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
       <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
-    <a href="#about" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
-    <a href="#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
-    <a href="#talent" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
-    <a href="#careers" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
-    <a href="#blog" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
-    <a href="#profile" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
-    <a href="#contact" style="padding:12px 0;">Contact</a>
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
   </nav>
 </header>
 
@@ -427,7 +57,7 @@
         <h1>Your books balanced.<br>Your phones <em>answered.</em><br>One team.</h1>
         <p class="lead">FMPH Multiservices LLC handles the back office and the front line for growing businesses — QBOA-supported bookkeeping paired with bilingual call center, sales, healthcare, and interpretation services.</p>
         <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">Request a consultation</a>
+          <a href="contact.html" class="btn btn-primary">Request a consultation</a>
           <a href="#services" class="btn btn-ghost">See all services</a>
         </div>
       </div>
@@ -446,8 +76,8 @@
     <div class="track" id="marqueeTrack"></div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
+  <!-- ABOUT TEASER -->
+  <section id="about-teaser">
     <div class="wrap about-grid">
       <div class="about-photo reveal">
         <img src="https://picsum.photos/seed/fmph-about-team/800/1000" alt="FMPH Multiservices team collaborating remotely">
@@ -455,28 +85,14 @@
       <div class="reveal">
         <span class="eyebrow">About FMPH</span>
         <h2>Built by people who've done this work themselves</h2>
-        <p style="color:var(--ink-soft); font-size:16.5px; margin-top:16px; max-width:56ch;">FMPH Multiservices LLC started with a simple idea: small and growing businesses shouldn't have to choose between answering the phone and closing the books. We bring bookkeeping, call center, sales, healthcare support, and interpretation together under one accountable team — so nothing falls through the cracks while you focus on running the business.</p>
-        <p style="color:var(--ink-soft); font-size:16.5px; margin-top:14px; max-width:56ch;">Our team works remotely and worldwide, which means we build schedules around your business hours — not the other way around.</p>
-        <div class="about-stats">
-          <div>
-            <span class="stat-num">6</span>
-            <span class="stat-label">SERVICE LINES</span>
-          </div>
-          <div>
-            <span class="stat-num">4</span>
-            <span class="stat-label">LANGUAGES SPOKEN</span>
-          </div>
-          <div>
-            <span class="stat-num">24/7</span>
-            <span class="stat-label">COVERAGE AVAILABLE</span>
-          </div>
-        </div>
+        <p style="color:var(--ink-soft); font-size:16.5px; margin-top:16px; max-width:56ch;">FMPH Multiservices LLC brings bookkeeping, call center, sales, healthcare support, and interpretation together under one accountable team — so nothing falls through the cracks while you focus on running the business.</p>
+        <a href="about.html" class="btn btn-ghost" style="margin-top:22px;">Read more about us</a>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section id="services">
+  <section id="services" style="padding-top:0;">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">What we do</span>
@@ -484,9 +100,7 @@
         <p>Every engagement is entered, tracked, and handled the way it belongs on a ledger — clearly coded, clearly accounted for. Tap a line to see what's included.</p>
       </div>
 
-      <div class="ledger reveal" id="ledgerList">
-        <!-- rows injected by JS -->
-      </div>
+      <div class="ledger reveal" id="ledgerList"></div>
     </div>
   </section>
 
@@ -569,207 +183,12 @@
     </div>
   </section>
 
-  <!-- JOIN OUR TALENT -->
-  <section id="talent" style="padding-top:0;">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Join our talent</span>
-        <h2>Find your category</h2>
-        <p>Every open role at FMPH falls into one of these categories. Pick yours to see what's currently open — every position is worldwide and remote.</p>
-      </div>
-      <div class="talent-grid reveal" id="talentGrid">
-        <!-- cards injected by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- CAREERS -->
-  <section id="careers" style="padding-top:0;">
-    <div class="wrap">
-      <div class="worldwide-banner reveal">
-        <img src="https://picsum.photos/seed/fmph-worldwide-map/1400/600" alt="Remote team working from locations around the world">
-        <div class="worldwide-content">
-          <span class="eyebrow">Worldwide · Remote-first</span>
-          <h3>We hire worldwide. Work from anywhere in the world.</h3>
-          <p>No relocation, no office required. If you have the skill and a reliable connection, you can apply from any country and work on your local schedule.</p>
-        </div>
-      </div>
-
-      <div class="section-head reveal">
-        <span class="eyebrow">Careers</span>
-        <h2>Open positions</h2>
-      </div>
-
-      <div class="career-toolbar reveal">
-        <span class="career-filter-label" id="careerFilterLabel">Showing all open roles <button id="clearFilter" style="display:none;">Clear filter ✕</button></span>
-        <span class="badge-worldwide">🌍 Worldwide · Remote</span>
-      </div>
-
-      <div class="career-grid reveal" id="careerGrid">
-        <!-- cards injected by JS -->
-      </div>
-      <div class="career-empty" id="careerEmpty">No open roles in this category right now — check back soon or <a href="#profile" style="color:var(--ledger); font-weight:600;">create a profile</a> to be notified.</div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
-  <section id="blog" style="padding-top:0;">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Blog</span>
-        <h2>Notes from FMPH</h2>
-        <p>Thoughts on bookkeeping, remote support teams, and running a multilingual back office.</p>
-      </div>
-      <div class="blog-grid reveal" id="blogGrid">
-        <!-- cards injected by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- MY PROFILE -->
-  <section id="profile" style="padding-top:0;">
-    <div class="wrap profile-grid">
-      <div class="profile-photo reveal">
-        <img src="https://picsum.photos/seed/fmph-profile-applicant/800/1000" alt="Applicant reviewing their profile on a laptop">
-      </div>
-      <div class="reveal">
-        <span class="eyebrow">My Profile</span>
-        <h2>Access your applicant profile</h2>
-        <p style="color:var(--ink-soft); font-size:16.5px; margin:14px 0 26px;">Log in to check your application status, or create a profile to apply to any open role in one click.</p>
-
-        <div class="profile-tabs">
-          <button class="profile-tab active" data-tab="login">Log in</button>
-          <button class="profile-tab" data-tab="signup">Create profile</button>
-        </div>
-
-        <form class="profile-form active" id="loginForm" data-form="login">
-          <div class="field">
-            <label for="loginEmail">Email</label>
-            <input id="loginEmail" type="email" placeholder="you@email.com" required>
-          </div>
-          <div class="field">
-            <label for="loginPassword">Password</label>
-            <input id="loginPassword" type="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Log in</button>
-          <p class="profile-note">Demo form — account access isn't connected yet.</p>
-        </form>
-
-        <form class="profile-form" id="signupForm" data-form="signup">
-          <div class="row2">
-            <div class="field">
-              <label for="suName">Full name</label>
-              <input id="suName" type="text" placeholder="Jane Doe" required>
-            </div>
-            <div class="field">
-              <label for="suCountry">Country</label>
-              <input id="suCountry" type="text" placeholder="Where you're based" required>
-            </div>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label for="suEmail">Email</label>
-              <input id="suEmail" type="email" placeholder="you@email.com" required>
-            </div>
-            <div class="field">
-              <label for="suPhone">Phone</label>
-              <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
-            </div>
-          </div>
-          <div class="field">
-            <label for="suCategory">Role category you're interested in</label>
-            <select id="suCategory">
-              <option>Bookkeeping (QBOA)</option>
-              <option>Call Center</option>
-              <option>Sales</option>
-              <option>Healthcare Support</option>
-              <option>Interpretation</option>
-              <option>Other / Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="suResume">Resume / CV</label>
-            <input id="suResume" type="file">
-          </div>
-          <div class="field">
-            <label for="suPassword">Create a password</label>
-            <input id="suPassword" type="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Create profile</button>
-          <p class="profile-note">Demo form — profiles aren't saved yet.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA BANNER -->
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="cta-banner reveal">
         <h2>Let's put your books in order and your phones in good hands.</h2>
-        <a href="#contact" class="btn btn-primary">Request a consultation</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Get in touch</span>
-        <h2>Tell us what you need handled</h2>
-        <p>Fill out the form and a member of the FMPH team will follow up within one business day.</p>
-      </div>
-
-      <div class="contact-grid reveal">
-        <form id="contactForm">
-          <div class="row2">
-            <div class="field">
-              <label for="name">Full name</label>
-              <input id="name" type="text" placeholder="Jane Doe" required>
-            </div>
-            <div class="field">
-              <label for="company">Company</label>
-              <input id="company" type="text" placeholder="Your business name">
-            </div>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@company.com" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" type="tel" placeholder="(000) 000-0000">
-            </div>
-          </div>
-          <div class="field">
-            <label for="service">Service you're interested in</label>
-            <select id="service">
-              <option>Bookkeeping (QBOA)</option>
-              <option>Call Center</option>
-              <option>Sales</option>
-              <option>Healthcare Support</option>
-              <option>Interpretation</option>
-              <option>Other / Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="A few details about what you need help with..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send request</button>
-        </form>
-
-        <div class="info-card">
-          <span class="eyebrow">Contact card</span>
-          <h3>FMPH Multiservices LLC</h3>
-          <div class="info-line"><span>EMAIL</span><span>joanapierre978@gmail.com</span></div>
-          <div class="info-line"><span>PHONE</span><span>+1 (713) 471-7656</span></div>
-          <div class="info-line"><span>HOURS</span><span>Mon–Fri, 9:00 AM–6:00 PM</span></div>
-          <div class="info-line"><span>SERVICE AREA</span><span>Remote &amp; nationwide (US)</span></div>
-          <div class="info-line" style="border-bottom:none;"><span>LANGUAGES</span><span>EN · ES · FR · Haitian Creole</span></div>
-        </div>
+        <a href="contact.html" class="btn btn-primary">Request a consultation</a>
       </div>
     </div>
   </section>
@@ -779,7 +198,7 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <a href="#top" class="logo">
+      <a href="index.html" class="logo">
         <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
         <span class="logo-text">
           <span class="mark">FMPH</span>
@@ -787,90 +206,41 @@
         </span>
       </a>
       <div class="foot-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#talent">Join Our Talent</a>
-        <a href="#careers">Careers</a>
-        <a href="#blog">Blog</a>
-        <a href="#profile">My Profile</a>
-        <a href="#contact">Contact</a>
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
     <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
   </div>
 </footer>
 
+<script src="assets/nav.js"></script>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  navToggle.addEventListener('click', () => {
-    const isOpen = mobileNav.style.display === 'flex';
-    mobileNav.style.display = isOpen ? 'none' : 'flex';
-    navToggle.setAttribute('aria-expanded', String(!isOpen));
-  });
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.style.display = 'none'; }));
-
   // Services ledger data
   const services = [
-    {
-      code: 'BK — 01',
-      title: 'Bookkeeping Services',
-      sub: 'QBOA-supported bookkeeping that keeps your books current, reconciled, and ready for tax time — every month, not just at year-end.',
-      items: ['Bank & credit card reconciliation', 'Invoicing & accounts receivable', 'Accounts payable & bill pay', 'Monthly financial reports', 'Payroll support', 'QuickBooks Online setup & cleanup']
-    },
-    {
-      code: 'CC — 02',
-      title: 'Call Center Services',
-      sub: 'Inbound and outbound support handled by trained, bilingual agents who represent your business the way you would.',
-      items: ['Inbound customer support', 'Appointment scheduling', 'Order & inquiry handling', 'After-hours & overflow coverage', 'Outbound follow-up calls', 'Live call reporting']
-    },
-    {
-      code: 'SL — 03',
-      title: 'Sales',
-      sub: 'Outbound calling and lead follow-up to keep your pipeline moving without adding to your own team\'s workload.',
-      items: ['Outbound lead generation', 'Cold & warm calling', 'Appointment setting', 'Upselling & cross-selling', 'CRM data entry & updates', 'Sales call scripting']
-    },
-    {
-      code: 'HC — 04',
-      title: 'Healthcare Support',
-      sub: 'Answering and administrative support built around the pace of a medical office, with care taken on every patient interaction.',
-      items: ['Patient appointment scheduling', 'Medical answering service', 'Patient intake calls', 'Insurance verification support', 'Prescription refill requests', 'Bilingual patient communication']
-    },
-    {
-      code: 'IN — 05',
-      title: 'Interpretation',
-      sub: 'Over-the-phone interpretation so language is never the reason a client, patient, or customer goes unheard.',
-      items: ['English ⇄ Spanish', 'English ⇄ French', 'English ⇄ Haitian Creole', 'Medical interpretation', 'Business & legal interpretation', 'On-demand & scheduled sessions']
-    },
-    {
-      code: 'XS — 06',
-      title: 'Additional Services',
-      sub: 'Back-office and support tasks that don\'t fit neatly in one line item — tell us what you need and we\'ll scope it.',
-      items: ['Virtual assistance', 'Data entry & back-office support', 'Customer retention calls', 'Email & chat support', 'Custom reporting', 'Ask us about your specific need']
-    }
+    { code: 'BK — 01', title: 'Bookkeeping Services', sub: 'QBOA-supported bookkeeping that keeps your books current, reconciled, and ready for tax time — every month, not just at year-end.', items: ['Bank & credit card reconciliation', 'Invoicing & accounts receivable', 'Accounts payable & bill pay', 'Monthly financial reports', 'Payroll support', 'QuickBooks Online setup & cleanup'] },
+    { code: 'CC — 02', title: 'Call Center Services', sub: 'Inbound and outbound support handled by trained, bilingual agents who represent your business the way you would.', items: ['Inbound customer support', 'Appointment scheduling', 'Order & inquiry handling', 'After-hours & overflow coverage', 'Outbound follow-up calls', 'Live call reporting'] },
+    { code: 'SL — 03', title: 'Sales', sub: "Outbound calling and lead follow-up to keep your pipeline moving without adding to your own team's workload.", items: ['Outbound lead generation', 'Cold & warm calling', 'Appointment setting', 'Upselling & cross-selling', 'CRM data entry & updates', 'Sales call scripting'] },
+    { code: 'HC — 04', title: 'Healthcare Support', sub: 'Answering and administrative support built around the pace of a medical office, with care taken on every patient interaction.', items: ['Patient appointment scheduling', 'Medical answering service', 'Patient intake calls', 'Insurance verification support', 'Prescription refill requests', 'Bilingual patient communication'] },
+    { code: 'IN — 05', title: 'Interpretation', sub: 'Over-the-phone interpretation so language is never the reason a client, patient, or customer goes unheard.', items: ['English ⇄ Spanish', 'English ⇄ French', 'English ⇄ Haitian Creole', 'Medical interpretation', 'Business & legal interpretation', 'On-demand & scheduled sessions'] },
+    { code: 'XS — 06', title: 'Additional Services', sub: "Back-office and support tasks that don't fit neatly in one line item — tell us what you need and we'll scope it.", items: ['Virtual assistance', 'Data entry & back-office support', 'Customer retention calls', 'Email & chat support', 'Custom reporting', 'Ask us about your specific need'] }
   ];
-
   const ledgerList = document.getElementById('ledgerList');
-  services.forEach((s, i) => {
+  services.forEach(s => {
     const row = document.createElement('div');
     row.className = 'ledger-row';
     row.innerHTML = `
       <div class="code">${s.code}</div>
       <div class="row-main">
-        <div>
-          <h3>${s.title}</h3>
-          <p class="row-sub">${s.sub}</p>
-        </div>
+        <div><h3>${s.title}</h3><p class="row-sub">${s.sub}</p></div>
         <div class="chev">+</div>
       </div>
-      <div class="row-detail">
-        <div class="row-detail-inner">
-          ${s.items.map(it => `<div>${it}</div>`).join('')}
-        </div>
-      </div>
+      <div class="row-detail"><div class="row-detail-inner">${s.items.map(it => `<div>${it}</div>`).join('')}</div></div>
     `;
     row.addEventListener('click', () => {
       const wasOpen = row.classList.contains('open');
@@ -880,15 +250,10 @@
     ledgerList.appendChild(row);
   });
 
-  // Marquee strip
-  const marqueeItems = [
-    'QBOA-supported bookkeeping', 'Bilingual agents · EN / ES / FR / Haitian Creole',
-    'HIPAA-conscious healthcare support', 'Flexible, scalable teams',
-    'Dedicated account manager', 'Hiring worldwide · remote-first roles'
-  ];
+  // Marquee
+  const marqueeItems = ['QBOA-supported bookkeeping', 'Bilingual agents · EN / ES / FR / Haitian Creole', 'HIPAA-conscious healthcare support', 'Flexible, scalable teams', 'Dedicated account manager', 'Hiring worldwide · remote-first roles'];
   const track = document.getElementById('marqueeTrack');
-  const doubled = [...marqueeItems, ...marqueeItems];
-  track.innerHTML = doubled.map(t => `<span>${t}</span>`).join('');
+  track.innerHTML = [...marqueeItems, ...marqueeItems].map(t => `<span>${t}</span>`).join('');
 
   // Hero ticker
   const tickerData = [
@@ -904,7 +269,6 @@
   const tickerEl = document.getElementById('ticker');
   let idx = 0;
   const maxRows = 6;
-
   function pushRow(){
     const d = tickerData[idx % tickerData.length];
     const li = document.createElement('li');
@@ -915,152 +279,6 @@
   }
   for (let i = 0; i < maxRows; i++) pushRow();
   setInterval(pushRow, 2600);
-
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
-
-  // ---------- JOIN OUR TALENT + CAREERS ----------
-  const talentCategories = [
-    { code: 'BK', title: 'Bookkeeping', seed: 'fmph-talent-bookkeeping', count: '2 open roles' },
-    { code: 'CC', title: 'Call Center', seed: 'fmph-talent-callcenter', count: '3 open roles' },
-    { code: 'SL', title: 'Sales', seed: 'fmph-talent-sales', count: '1 open role' },
-    { code: 'HC', title: 'Healthcare Support', seed: 'fmph-talent-healthcare', count: '1 open role' },
-    { code: 'IN', title: 'Interpretation', seed: 'fmph-talent-interpretation', count: '2 open roles' },
-    { code: 'XS', title: 'Additional Services', seed: 'fmph-talent-additional', count: '1 open role' }
-  ];
-
-  const jobs = [
-    { code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', seed: 'fmph-job-callcenter-agent' },
-    { code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', seed: 'fmph-job-afterhours' },
-    { code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', seed: 'fmph-job-retention' },
-    { code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', seed: 'fmph-job-bookkeeper' },
-    { code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', seed: 'fmph-job-ap-specialist' },
-    { code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', seed: 'fmph-job-sales-rep' },
-    { code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', seed: 'fmph-job-medical-answering' },
-    { code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', seed: 'fmph-job-interpreter-es' },
-    { code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', seed: 'fmph-job-interpreter-ht' },
-    { code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', seed: 'fmph-job-virtual-assistant' }
-  ];
-
-  const talentGrid = document.getElementById('talentGrid');
-  talentCategories.forEach(cat => {
-    const card = document.createElement('div');
-    card.className = 'talent-card';
-    card.dataset.code = cat.code;
-    card.innerHTML = `
-      <img src="https://picsum.photos/seed/${cat.seed}/500/380" alt="${cat.title} roles at FMPH Multiservices">
-      <div class="talent-info">
-        <div class="talent-code">${cat.code} — WORLDWIDE</div>
-        <h3>${cat.title}</h3>
-        <div class="talent-count">${cat.count}</div>
-      </div>
-    `;
-    card.addEventListener('click', () => filterCareers(cat.code, cat.title));
-    talentGrid.appendChild(card);
-  });
-
-  const careerGrid = document.getElementById('careerGrid');
-  const careerEmpty = document.getElementById('careerEmpty');
-  const careerFilterLabel = document.getElementById('careerFilterLabel');
-  const clearFilterBtn = document.getElementById('clearFilter');
-
-  function renderJobs(filterCode){
-    careerGrid.innerHTML = '';
-    const list = filterCode ? jobs.filter(j => j.code === filterCode) : jobs;
-    careerEmpty.style.display = list.length ? 'none' : 'block';
-    list.forEach(j => {
-      const card = document.createElement('div');
-      card.className = 'job-card';
-      card.innerHTML = `
-        <img src="https://picsum.photos/seed/${j.seed}/500/320" alt="${j.title} at FMPH Multiservices">
-        <div class="job-body">
-          <span class="job-dept">${j.code} — ${j.type}</span>
-          <h3>${j.title}</h3>
-          <div class="job-meta">
-            <span class="badge-worldwide">🌍 Worldwide · Remote</span>
-          </div>
-          <p class="job-blurb">${j.blurb}</p>
-          <a href="#profile" class="btn btn-primary">Apply now</a>
-        </div>
-      `;
-      careerGrid.appendChild(card);
-    });
-  }
-
-  function filterCareers(code, title){
-    document.querySelectorAll('.talent-card').forEach(c => c.classList.toggle('active', c.dataset.code === code));
-    careerFilterLabel.childNodes[0].textContent = `Showing ${title} roles `;
-    clearFilterBtn.style.display = 'inline-block';
-    renderJobs(code);
-    document.getElementById('careers').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  clearFilterBtn.addEventListener('click', () => {
-    document.querySelectorAll('.talent-card').forEach(c => c.classList.remove('active'));
-    careerFilterLabel.childNodes[0].textContent = 'Showing all open roles ';
-    clearFilterBtn.style.display = 'none';
-    renderJobs(null);
-  });
-
-  renderJobs(null);
-
-  // ---------- BLOG ----------
-  const blogPosts = [
-    { tag: 'Bookkeeping', title: "5 Signs It's Time to Outsource Your Bookkeeping", excerpt: 'Falling behind on reconciliations is usually the first sign — here are the others to watch for.', date: 'Jul 14, 2026', seed: 'fmph-blog-bookkeeping' },
-    { tag: 'Call Center', title: 'What Makes a Great Remote Call Center Agent', excerpt: 'It is less about the script and more about how an agent handles the moment the script runs out.', date: 'Jun 28, 2026', seed: 'fmph-blog-callcenter' },
-    { tag: 'Interpretation', title: "Why Multilingual Support Isn't Optional Anymore", excerpt: 'Customers who cannot get help in their language go find a competitor who offers it.', date: 'Jun 09, 2026', seed: 'fmph-blog-interpretation' }
-  ];
-
-  const blogGrid = document.getElementById('blogGrid');
-  blogPosts.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'blog-card';
-    card.innerHTML = `
-      <img src="https://picsum.photos/seed/${p.seed}/700/520" alt="${p.title}">
-      <span class="blog-tag">${p.tag}</span>
-      <h3>${p.title}</h3>
-      <p>${p.excerpt}</p>
-      <div class="blog-meta"><span>${p.date}</span><a href="#blog">Read more →</a></div>
-    `;
-    blogGrid.appendChild(card);
-  });
-
-  // ---------- MY PROFILE TABS ----------
-  const profileTabs = document.querySelectorAll('.profile-tab');
-  profileTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      profileTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      document.querySelectorAll('.profile-form').forEach(f => f.classList.remove('active'));
-      document.querySelector(`.profile-form[data-form="${tab.dataset.tab}"]`).classList.add('active');
-    });
-  });
-
-  ['loginForm', 'signupForm'].forEach(id => {
-    document.getElementById(id).addEventListener('submit', function(e){
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      const original = btn.textContent;
-      btn.textContent = id === 'loginForm' ? 'Logged in ✓' : 'Profile created ✓';
-      btn.style.background = 'var(--ledger-deep)';
-      setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
-    });
-  });
-
-  // Contact form (static demo — no backend wired up)
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    const original = btn.textContent;
-    btn.textContent = 'Request sent ✓';
-    btn.style.background = 'var(--ledger-deep)';
-    setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
-  });
 </script>
-
 </body>
 </html>

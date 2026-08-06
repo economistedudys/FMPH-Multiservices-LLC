@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile — FMPH Multiservices LLC Careers</title>
+<meta name="description" content="Log in or create an applicant profile to apply for open roles at FMPH Multiservices LLC.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="my-profile.html" class="btn btn-ghost active">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">My Profile</span>
+      <h1 class="reveal">Access your applicant profile</h1>
+      <p class="reveal">Log in to check your application status, or create a profile to apply to any open role in one click.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap profile-grid">
+      <div class="profile-photo reveal">
+        <img src="https://picsum.photos/seed/fmph-profile-applicant/800/1000" alt="Applicant reviewing their profile on a laptop">
+      </div>
+      <div class="reveal">
+        <div class="profile-tabs">
+          <button class="profile-tab active" data-tab="login">Log in</button>
+          <button class="profile-tab" data-tab="signup">Create profile</button>
+        </div>
+
+        <form class="profile-form active" id="loginForm" data-form="login">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Log in</button>
+          <p class="profile-note">Demo form — account access isn't connected yet.</p>
+        </form>
+
+        <form class="profile-form" id="signupForm" data-form="signup">
+          <div class="row2">
+            <div class="field">
+              <label for="suName">Full name</label>
+              <input id="suName" type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="suCountry">Country</label>
+              <input id="suCountry" type="text" placeholder="Where you're based" required>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="suEmail">Email</label>
+              <input id="suEmail" type="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="suPhone">Phone</label>
+              <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="suCategory">Role category you're interested in</label>
+            <select id="suCategory">
+              <option>Bookkeeping (QBOA)</option>
+              <option>Call Center</option>
+              <option>Sales</option>
+              <option>Healthcare Support</option>
+              <option>Interpretation</option>
+              <option>Other / Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="suResume">Resume / CV</label>
+            <input id="suResume" type="file">
+          </div>
+          <div class="field">
+            <label for="suPassword">Create a password</label>
+            <input id="suPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Create profile</button>
+          <p class="profile-note">Demo form — profiles aren't saved yet.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+  const profileTabs = document.querySelectorAll('.profile-tab');
+  profileTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      profileTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.profile-form').forEach(f => f.classList.remove('active'));
+      document.querySelector(`.profile-form[data-form="${tab.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  ['loginForm', 'signupForm'].forEach(id => {
+    document.getElementById(id).addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+      btn.textContent = id === 'loginForm' ? 'Logged in ✓' : 'Profile created ✓';
+      btn.style.background = 'var(--ledger-deep)';
+      setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
+    });
+  });
+</script>
+</body>
+</html>

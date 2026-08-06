@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — FMPH Multiservices LLC</title>
+<meta name="description" content="Get in touch with FMPH Multiservices LLC for bookkeeping, call center, sales, healthcare support, or interpretation services.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="my-profile.html" class="btn btn-ghost">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Get in touch</span>
+      <h1 class="reveal">Tell us what you need handled</h1>
+      <p class="reveal">Fill out the form and a member of the FMPH team will follow up within one business day.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap contact-grid">
+      <form id="contactForm" class="reveal">
+        <div class="row2">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Jane Doe" required>
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" type="text" placeholder="Your business name">
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="(000) 000-0000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="service">Service you're interested in</label>
+          <select id="service">
+            <option>Bookkeeping (QBOA)</option>
+            <option>Call Center</option>
+            <option>Sales</option>
+            <option>Healthcare Support</option>
+            <option>Interpretation</option>
+            <option>Other / Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="A few details about what you need help with..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send request</button>
+      </form>
+
+      <div class="info-card reveal">
+        <span class="eyebrow">Contact card</span>
+        <h3>FMPH Multiservices LLC</h3>
+        <div class="info-line"><span>EMAIL</span><span>joanapierre978@gmail.com</span></div>
+        <div class="info-line"><span>PHONE</span><span>+1 (713) 471-7656</span></div>
+        <div class="info-line"><span>HOURS</span><span>Mon–Fri, 9:00 AM–6:00 PM</span></div>
+        <div class="info-line"><span>SERVICE AREA</span><span>Remote &amp; worldwide</span></div>
+        <div class="info-line" style="border-bottom:none;"><span>LANGUAGES</span><span>EN · ES · FR · Haitian Creole</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.textContent = 'Request sent ✓';
+    btn.style.background = 'var(--ledger-deep)';
+    setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Our Talent — FMPH Multiservices LLC</title>
+<meta name="description" content="Browse job categories at FMPH Multiservices LLC — Bookkeeping, Call Center, Sales, Healthcare Support, Interpretation, and more. Worldwide, remote roles.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html" class="active">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="my-profile.html" class="btn btn-ghost">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Join our talent</span>
+      <h1 class="reveal">Find your category</h1>
+      <p class="reveal">Every open role at FMPH falls into one of these categories. Pick yours to see what's currently open on our Careers page — every position is worldwide and remote.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="talent-grid reveal" id="talentGrid"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="worldwide-banner reveal">
+        <img src="https://picsum.photos/seed/fmph-worldwide-map/1400/600" alt="Remote team working from locations around the world">
+        <div class="worldwide-content">
+          <span class="eyebrow">Worldwide · Remote-first</span>
+          <h3>We hire worldwide. Work from anywhere in the world.</h3>
+          <p>No relocation, no office required. If you have the skill and a reliable connection, you can apply from any country and work on your local schedule.</p>
+        </div>
+      </div>
+      <div class="cta-banner reveal">
+        <h2>Don't see your category yet?</h2>
+        <a href="my-profile.html" class="btn btn-primary">Create a profile anyway</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+  const talentCategories = [
+    { code: 'BK', title: 'Bookkeeping', seed: 'fmph-talent-bookkeeping', count: '2 open roles' },
+    { code: 'CC', title: 'Call Center', seed: 'fmph-talent-callcenter', count: '3 open roles' },
+    { code: 'SL', title: 'Sales', seed: 'fmph-talent-sales', count: '1 open role' },
+    { code: 'HC', title: 'Healthcare Support', seed: 'fmph-talent-healthcare', count: '1 open role' },
+    { code: 'IN', title: 'Interpretation', seed: 'fmph-talent-interpretation', count: '2 open roles' },
+    { code: 'XS', title: 'Additional Services', seed: 'fmph-talent-additional', count: '1 open role' }
+  ];
+  const talentGrid = document.getElementById('talentGrid');
+  talentCategories.forEach(cat => {
+    const card = document.createElement('a');
+    card.href = `careers.html?cat=${cat.code}`;
+    card.className = 'talent-card';
+    card.style.display = 'block';
+    card.innerHTML = `
+      <img src="https://picsum.photos/seed/${cat.seed}/500/380" alt="${cat.title} roles at FMPH Multiservices">
+      <div class="talent-info">
+        <div class="talent-code">${cat.code} — WORLDWIDE</div>
+        <h3>${cat.title}</h3>
+        <div class="talent-count">${cat.count}</div>
+      </div>
+    `;
+    talentGrid.appendChild(card);
+  });
+</script>
+</body>
+</html>

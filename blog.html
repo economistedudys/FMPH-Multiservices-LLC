@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — FMPH Multiservices LLC</title>
+<meta name="description" content="Notes from FMPH Multiservices LLC on bookkeeping, remote call center teams, sales, healthcare support, and interpretation.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="my-profile.html" class="btn btn-ghost">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Blog</span>
+      <h1 class="reveal">Notes from FMPH</h1>
+      <p class="reveal">Thoughts on bookkeeping, remote support teams, and running a multilingual back office.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="blog-grid reveal" id="blogGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+  const blogPosts = [
+    { tag: 'Bookkeeping', title: "5 Signs It's Time to Outsource Your Bookkeeping", excerpt: 'Falling behind on reconciliations is usually the first sign — here are the others to watch for.', date: 'Jul 14, 2026', seed: 'fmph-blog-bookkeeping' },
+    { tag: 'Call Center', title: 'What Makes a Great Remote Call Center Agent', excerpt: 'It is less about the script and more about how an agent handles the moment the script runs out.', date: 'Jun 28, 2026', seed: 'fmph-blog-callcenter' },
+    { tag: 'Interpretation', title: "Why Multilingual Support Isn't Optional Anymore", excerpt: 'Customers who cannot get help in their language go find a competitor who offers it.', date: 'Jun 09, 2026', seed: 'fmph-blog-interpretation' },
+    { tag: 'Remote Work', title: 'How We Hire Worldwide Without Losing Quality', excerpt: 'A look at how FMPH screens, trains, and manages a fully remote, worldwide team.', date: 'May 22, 2026', seed: 'fmph-blog-worldwide' },
+    { tag: 'Sales', title: 'Outbound Calling Scripts That Do Not Sound Like Scripts', excerpt: 'The best outbound reps treat a script as a map, not a set of lines to read.', date: 'May 03, 2026', seed: 'fmph-blog-sales' },
+    { tag: 'Healthcare', title: 'What Medical Offices Should Expect From an Answering Service', excerpt: 'Patient intake calls need more care than a typical support line — here is what to look for.', date: 'Apr 18, 2026', seed: 'fmph-blog-healthcare' }
+  ];
+  const blogGrid = document.getElementById('blogGrid');
+  blogPosts.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.innerHTML = `
+      <img src="https://picsum.photos/seed/${p.seed}/700/520" alt="${p.title}">
+      <span class="blog-tag">${p.tag}</span>
+      <h3>${p.title}</h3>
+      <p>${p.excerpt}</p>
+      <div class="blog-meta"><span>${p.date}</span><a href="blog.html">Read more →</a></div>
+    `;
+    blogGrid.appendChild(card);
+  });
+</script>
+</body>
+</html>
