@@ -87,7 +87,7 @@
   .logo-text{display:flex; flex-direction:column; line-height:1; gap:3px;}
   .logo .mark{font-family:'Fraunces', serif; font-weight:700; font-size:22px; letter-spacing:.01em; color:var(--ink);}
   .logo .sub{font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ledger);}
-  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links{display:flex; gap:22px; align-items:center;}
   nav.links a{
     text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink-soft);
     padding:4px 2px; border-bottom:1px solid transparent; transition:.2s;
@@ -268,6 +268,87 @@
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
 
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
+  .about-photo img{width:100%; height:100%; object-fit:cover; border-radius:var(--radius); display:block; aspect-ratio:4/5;}
+  .about-stats{display:flex; gap:28px; margin-top:28px; flex-wrap:wrap;}
+  .about-stats div{border-left:2px solid var(--ledger); padding-left:14px;}
+  .about-stats .stat-num{font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:var(--ink); display:block;}
+  .about-stats .stat-label{font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; letter-spacing:.05em;}
+
+  /* ---------- WORLDWIDE BANNER ---------- */
+  .worldwide-banner{
+    position:relative; border-radius:var(--radius); overflow:hidden; min-height:280px;
+    display:flex; align-items:center; margin-bottom:52px;
+  }
+  .worldwide-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .worldwide-banner::after{content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(20,27,30,.88) 0%, rgba(20,27,30,.55) 55%, rgba(20,27,30,.22) 100%);}
+  .worldwide-content{position:relative; z-index:1; padding:44px 48px; color:#fff; max-width:560px;}
+  .worldwide-content .eyebrow{color:#8FEFDB;}
+  .worldwide-content .eyebrow::before{background:#8FEFDB; box-shadow:0 0 0 3px rgba(143,239,219,.25);}
+  .worldwide-content h3{color:#fff; font-size:clamp(22px,2.6vw,30px); margin:14px 0 12px;}
+  .worldwide-content p{color:#DCEAE7; font-size:15px; margin:0;}
+
+  /* ---------- TALENT CATEGORIES ---------- */
+  .talent-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .talent-card{
+    position:relative; border-radius:var(--radius); overflow:hidden; cursor:pointer;
+    aspect-ratio:4/3; border:1px solid var(--line); transition:transform .25s, outline-color .2s;
+  }
+  .talent-card:hover{transform:translateY(-4px);}
+  .talent-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  .talent-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,27,30,0) 35%, rgba(20,27,30,.85) 100%);}
+  .talent-card .talent-info{position:absolute; left:0; right:0; bottom:0; z-index:1; padding:18px; color:#fff;}
+  .talent-card .talent-code{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#8FEFDB;}
+  .talent-card h3{color:#fff; font-size:19px; margin:6px 0 4px;}
+  .talent-card .talent-count{font-size:12.5px; color:#DCEAE7;}
+  .talent-card.active{outline:2px solid var(--ledger); outline-offset:2px;}
+
+  /* ---------- CAREERS ---------- */
+  .career-toolbar{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:32px;}
+  .career-filter-label{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); display:flex; align-items:center; gap:10px;}
+  .career-filter-label button{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ledger); background:none; border:1px solid var(--ledger);
+    padding:4px 10px; border-radius:20px; cursor:pointer;
+  }
+  .badge-worldwide{
+    display:inline-flex; align-items:center; gap:6px; font-size:12px; font-family:'IBM Plex Mono',monospace;
+    border:1px solid var(--line); background:var(--paper-raised); padding:5px 11px; border-radius:20px; color:var(--ink-soft);
+  }
+  .career-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .job-card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; background:var(--paper-raised);}
+  .job-card img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block;}
+  .job-card .job-body{padding:20px; display:flex; flex-direction:column; gap:10px; flex:1;}
+  .job-card .job-dept{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--ledger-deep); text-transform:uppercase;}
+  .job-card h3{font-size:19px;}
+  .job-card .job-meta{display:flex; gap:8px; flex-wrap:wrap;}
+  .job-card p.job-blurb{font-size:13.5px; color:var(--ink-soft); margin:0; flex:1;}
+  .job-card .btn{margin-top:6px; align-self:flex-start; padding:9px 18px; font-size:13px;}
+  .career-empty{display:none; padding:40px; text-align:center; color:var(--ink-soft); border:1px dashed var(--line); border-radius:var(--radius);}
+
+  /* ---------- BLOG ---------- */
+  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .blog-card{display:flex; flex-direction:column; gap:14px;}
+  .blog-card img{width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius); display:block;}
+  .blog-card .blog-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--ledger-deep); text-transform:uppercase;}
+  .blog-card h3{font-size:19px;}
+  .blog-card p{font-size:14px; color:var(--ink-soft); margin:0;}
+  .blog-card .blog-meta{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft); display:flex; justify-content:space-between; align-items:center;}
+  .blog-card .blog-meta a{color:var(--ledger); text-decoration:none; font-weight:600;}
+
+  /* ---------- MY PROFILE ---------- */
+  .profile-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
+  .profile-photo img{width:100%; height:100%; object-fit:cover; border-radius:var(--radius); display:block; aspect-ratio:4/5;}
+  .profile-tabs{display:flex; gap:4px; margin-bottom:24px; border:1px solid var(--line); border-radius:var(--radius); padding:4px; width:fit-content;}
+  .profile-tab{
+    font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; font-weight:600; padding:9px 18px;
+    border:none; background:transparent; color:var(--ink-soft); cursor:pointer; border-radius:var(--radius); transition:.2s;
+  }
+  .profile-tab.active{background:var(--ink); color:var(--paper);}
+  .profile-form{display:none;}
+  .profile-form.active{display:grid;}
+  .profile-note{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
     nav.links{display:none;}
@@ -279,11 +360,20 @@
     .row2{grid-template-columns:1fr;}
     .ledger-row{grid-template-columns:1fr;}
     .ledger-row .code{padding-top:0;}
+    .about-grid{grid-template-columns:1fr;}
+    .talent-grid{grid-template-columns:1fr 1fr;}
+    .career-grid{grid-template-columns:1fr 1fr;}
+    .blog-grid{grid-template-columns:1fr 1fr;}
+    .profile-grid{grid-template-columns:1fr;}
   }
   @media (max-width:560px){
     .wrap{padding:0 20px;}
     .why-grid{grid-template-columns:1fr;}
     .cta-banner{padding:38px 26px;}
+    .talent-grid{grid-template-columns:1fr;}
+    .career-grid{grid-template-columns:1fr;}
+    .blog-grid{grid-template-columns:1fr;}
+    .worldwide-content{padding:30px 24px;}
   }
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
@@ -303,22 +393,26 @@
       </span>
     </a>
     <nav class="links">
+      <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#how">How it works</a>
-      <a href="#industries">Industries</a>
-      <a href="#why">Why FMPH</a>
+      <a href="#talent">Join Our Talent</a>
+      <a href="#careers">Careers</a>
+      <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div style="display:flex; align-items:center; gap:14px;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="#profile" class="btn btn-ghost">My Profile</a>
       <a href="#contact" class="btn btn-primary">Request a consultation</a>
       <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="#about" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
     <a href="#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
-    <a href="#how" style="padding:12px 0; border-bottom:1px solid var(--line);">How it works</a>
-    <a href="#industries" style="padding:12px 0; border-bottom:1px solid var(--line);">Industries</a>
-    <a href="#why" style="padding:12px 0; border-bottom:1px solid var(--line);">Why FMPH</a>
+    <a href="#talent" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="#careers" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="#blog" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="#profile" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
     <a href="#contact" style="padding:12px 0;">Contact</a>
   </nav>
 </header>
@@ -351,6 +445,35 @@
   <div class="marquee-strip">
     <div class="track" id="marqueeTrack"></div>
   </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo reveal">
+        <img src="https://picsum.photos/seed/fmph-about-team/800/1000" alt="FMPH Multiservices team collaborating remotely">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">About FMPH</span>
+        <h2>Built by people who've done this work themselves</h2>
+        <p style="color:var(--ink-soft); font-size:16.5px; margin-top:16px; max-width:56ch;">FMPH Multiservices LLC started with a simple idea: small and growing businesses shouldn't have to choose between answering the phone and closing the books. We bring bookkeeping, call center, sales, healthcare support, and interpretation together under one accountable team — so nothing falls through the cracks while you focus on running the business.</p>
+        <p style="color:var(--ink-soft); font-size:16.5px; margin-top:14px; max-width:56ch;">Our team works remotely and worldwide, which means we build schedules around your business hours — not the other way around.</p>
+        <div class="about-stats">
+          <div>
+            <span class="stat-num">6</span>
+            <span class="stat-label">SERVICE LINES</span>
+          </div>
+          <div>
+            <span class="stat-num">4</span>
+            <span class="stat-label">LANGUAGES SPOKEN</span>
+          </div>
+          <div>
+            <span class="stat-num">24/7</span>
+            <span class="stat-label">COVERAGE AVAILABLE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- SERVICES -->
   <section id="services">
@@ -446,6 +569,139 @@
     </div>
   </section>
 
+  <!-- JOIN OUR TALENT -->
+  <section id="talent" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Join our talent</span>
+        <h2>Find your category</h2>
+        <p>Every open role at FMPH falls into one of these categories. Pick yours to see what's currently open — every position is worldwide and remote.</p>
+      </div>
+      <div class="talent-grid reveal" id="talentGrid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section id="careers" style="padding-top:0;">
+    <div class="wrap">
+      <div class="worldwide-banner reveal">
+        <img src="https://picsum.photos/seed/fmph-worldwide-map/1400/600" alt="Remote team working from locations around the world">
+        <div class="worldwide-content">
+          <span class="eyebrow">Worldwide · Remote-first</span>
+          <h3>We hire worldwide. Work from anywhere in the world.</h3>
+          <p>No relocation, no office required. If you have the skill and a reliable connection, you can apply from any country and work on your local schedule.</p>
+        </div>
+      </div>
+
+      <div class="section-head reveal">
+        <span class="eyebrow">Careers</span>
+        <h2>Open positions</h2>
+      </div>
+
+      <div class="career-toolbar reveal">
+        <span class="career-filter-label" id="careerFilterLabel">Showing all open roles <button id="clearFilter" style="display:none;">Clear filter ✕</button></span>
+        <span class="badge-worldwide">🌍 Worldwide · Remote</span>
+      </div>
+
+      <div class="career-grid reveal" id="careerGrid">
+        <!-- cards injected by JS -->
+      </div>
+      <div class="career-empty" id="careerEmpty">No open roles in this category right now — check back soon or <a href="#profile" style="color:var(--ledger); font-weight:600;">create a profile</a> to be notified.</div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Blog</span>
+        <h2>Notes from FMPH</h2>
+        <p>Thoughts on bookkeeping, remote support teams, and running a multilingual back office.</p>
+      </div>
+      <div class="blog-grid reveal" id="blogGrid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- MY PROFILE -->
+  <section id="profile" style="padding-top:0;">
+    <div class="wrap profile-grid">
+      <div class="profile-photo reveal">
+        <img src="https://picsum.photos/seed/fmph-profile-applicant/800/1000" alt="Applicant reviewing their profile on a laptop">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">My Profile</span>
+        <h2>Access your applicant profile</h2>
+        <p style="color:var(--ink-soft); font-size:16.5px; margin:14px 0 26px;">Log in to check your application status, or create a profile to apply to any open role in one click.</p>
+
+        <div class="profile-tabs">
+          <button class="profile-tab active" data-tab="login">Log in</button>
+          <button class="profile-tab" data-tab="signup">Create profile</button>
+        </div>
+
+        <form class="profile-form active" id="loginForm" data-form="login">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Log in</button>
+          <p class="profile-note">Demo form — account access isn't connected yet.</p>
+        </form>
+
+        <form class="profile-form" id="signupForm" data-form="signup">
+          <div class="row2">
+            <div class="field">
+              <label for="suName">Full name</label>
+              <input id="suName" type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="suCountry">Country</label>
+              <input id="suCountry" type="text" placeholder="Where you're based" required>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="suEmail">Email</label>
+              <input id="suEmail" type="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="suPhone">Phone</label>
+              <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="suCategory">Role category you're interested in</label>
+            <select id="suCategory">
+              <option>Bookkeeping (QBOA)</option>
+              <option>Call Center</option>
+              <option>Sales</option>
+              <option>Healthcare Support</option>
+              <option>Interpretation</option>
+              <option>Other / Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="suResume">Resume / CV</label>
+            <input id="suResume" type="file">
+          </div>
+          <div class="field">
+            <label for="suPassword">Create a password</label>
+            <input id="suPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Create profile</button>
+          <p class="profile-note">Demo form — profiles aren't saved yet.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA BANNER -->
   <section style="padding-top:0;">
     <div class="wrap">
@@ -531,10 +787,12 @@
         </span>
       </a>
       <div class="foot-links">
+        <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#how">How it works</a>
-        <a href="#industries">Industries</a>
-        <a href="#why">Why FMPH</a>
+        <a href="#talent">Join Our Talent</a>
+        <a href="#careers">Careers</a>
+        <a href="#blog">Blog</a>
+        <a href="#profile">My Profile</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -626,7 +884,7 @@
   const marqueeItems = [
     'QBOA-supported bookkeeping', 'Bilingual agents · EN / ES / FR / Haitian Creole',
     'HIPAA-conscious healthcare support', 'Flexible, scalable teams',
-    'Dedicated account manager', 'Nationwide remote coverage'
+    'Dedicated account manager', 'Hiring worldwide · remote-first roles'
   ];
   const track = document.getElementById('marqueeTrack');
   const doubled = [...marqueeItems, ...marqueeItems];
@@ -664,6 +922,134 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
+
+  // ---------- JOIN OUR TALENT + CAREERS ----------
+  const talentCategories = [
+    { code: 'BK', title: 'Bookkeeping', seed: 'fmph-talent-bookkeeping', count: '2 open roles' },
+    { code: 'CC', title: 'Call Center', seed: 'fmph-talent-callcenter', count: '3 open roles' },
+    { code: 'SL', title: 'Sales', seed: 'fmph-talent-sales', count: '1 open role' },
+    { code: 'HC', title: 'Healthcare Support', seed: 'fmph-talent-healthcare', count: '1 open role' },
+    { code: 'IN', title: 'Interpretation', seed: 'fmph-talent-interpretation', count: '2 open roles' },
+    { code: 'XS', title: 'Additional Services', seed: 'fmph-talent-additional', count: '1 open role' }
+  ];
+
+  const jobs = [
+    { code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', seed: 'fmph-job-callcenter-agent' },
+    { code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', seed: 'fmph-job-afterhours' },
+    { code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', seed: 'fmph-job-retention' },
+    { code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', seed: 'fmph-job-bookkeeper' },
+    { code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', seed: 'fmph-job-ap-specialist' },
+    { code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', seed: 'fmph-job-sales-rep' },
+    { code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', seed: 'fmph-job-medical-answering' },
+    { code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', seed: 'fmph-job-interpreter-es' },
+    { code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', seed: 'fmph-job-interpreter-ht' },
+    { code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', seed: 'fmph-job-virtual-assistant' }
+  ];
+
+  const talentGrid = document.getElementById('talentGrid');
+  talentCategories.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'talent-card';
+    card.dataset.code = cat.code;
+    card.innerHTML = `
+      <img src="https://picsum.photos/seed/${cat.seed}/500/380" alt="${cat.title} roles at FMPH Multiservices">
+      <div class="talent-info">
+        <div class="talent-code">${cat.code} — WORLDWIDE</div>
+        <h3>${cat.title}</h3>
+        <div class="talent-count">${cat.count}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => filterCareers(cat.code, cat.title));
+    talentGrid.appendChild(card);
+  });
+
+  const careerGrid = document.getElementById('careerGrid');
+  const careerEmpty = document.getElementById('careerEmpty');
+  const careerFilterLabel = document.getElementById('careerFilterLabel');
+  const clearFilterBtn = document.getElementById('clearFilter');
+
+  function renderJobs(filterCode){
+    careerGrid.innerHTML = '';
+    const list = filterCode ? jobs.filter(j => j.code === filterCode) : jobs;
+    careerEmpty.style.display = list.length ? 'none' : 'block';
+    list.forEach(j => {
+      const card = document.createElement('div');
+      card.className = 'job-card';
+      card.innerHTML = `
+        <img src="https://picsum.photos/seed/${j.seed}/500/320" alt="${j.title} at FMPH Multiservices">
+        <div class="job-body">
+          <span class="job-dept">${j.code} — ${j.type}</span>
+          <h3>${j.title}</h3>
+          <div class="job-meta">
+            <span class="badge-worldwide">🌍 Worldwide · Remote</span>
+          </div>
+          <p class="job-blurb">${j.blurb}</p>
+          <a href="#profile" class="btn btn-primary">Apply now</a>
+        </div>
+      `;
+      careerGrid.appendChild(card);
+    });
+  }
+
+  function filterCareers(code, title){
+    document.querySelectorAll('.talent-card').forEach(c => c.classList.toggle('active', c.dataset.code === code));
+    careerFilterLabel.childNodes[0].textContent = `Showing ${title} roles `;
+    clearFilterBtn.style.display = 'inline-block';
+    renderJobs(code);
+    document.getElementById('careers').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  clearFilterBtn.addEventListener('click', () => {
+    document.querySelectorAll('.talent-card').forEach(c => c.classList.remove('active'));
+    careerFilterLabel.childNodes[0].textContent = 'Showing all open roles ';
+    clearFilterBtn.style.display = 'none';
+    renderJobs(null);
+  });
+
+  renderJobs(null);
+
+  // ---------- BLOG ----------
+  const blogPosts = [
+    { tag: 'Bookkeeping', title: "5 Signs It's Time to Outsource Your Bookkeeping", excerpt: 'Falling behind on reconciliations is usually the first sign — here are the others to watch for.', date: 'Jul 14, 2026', seed: 'fmph-blog-bookkeeping' },
+    { tag: 'Call Center', title: 'What Makes a Great Remote Call Center Agent', excerpt: 'It is less about the script and more about how an agent handles the moment the script runs out.', date: 'Jun 28, 2026', seed: 'fmph-blog-callcenter' },
+    { tag: 'Interpretation', title: "Why Multilingual Support Isn't Optional Anymore", excerpt: 'Customers who cannot get help in their language go find a competitor who offers it.', date: 'Jun 09, 2026', seed: 'fmph-blog-interpretation' }
+  ];
+
+  const blogGrid = document.getElementById('blogGrid');
+  blogPosts.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.innerHTML = `
+      <img src="https://picsum.photos/seed/${p.seed}/700/520" alt="${p.title}">
+      <span class="blog-tag">${p.tag}</span>
+      <h3>${p.title}</h3>
+      <p>${p.excerpt}</p>
+      <div class="blog-meta"><span>${p.date}</span><a href="#blog">Read more →</a></div>
+    `;
+    blogGrid.appendChild(card);
+  });
+
+  // ---------- MY PROFILE TABS ----------
+  const profileTabs = document.querySelectorAll('.profile-tab');
+  profileTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      profileTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.profile-form').forEach(f => f.classList.remove('active'));
+      document.querySelector(`.profile-form[data-form="${tab.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  ['loginForm', 'signupForm'].forEach(id => {
+    document.getElementById(id).addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+      btn.textContent = id === 'loginForm' ? 'Logged in ✓' : 'Profile created ✓';
+      btn.style.background = 'var(--ledger-deep)';
+      setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
+    });
+  });
 
   // Contact form (static demo — no backend wired up)
   document.getElementById('contactForm').addEventListener('submit', function(e){
