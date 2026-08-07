@@ -63,67 +63,82 @@
         <img src="https://picsum.photos/seed/fmph-profile-applicant/800/1000" alt="Applicant reviewing their profile on a laptop">
       </div>
       <div class="reveal">
-        <div class="profile-tabs">
-          <button class="profile-tab active" data-tab="login">Log in</button>
-          <button class="profile-tab" data-tab="signup">Create profile</button>
+        <div id="formsView">
+          <div class="profile-tabs">
+            <button class="profile-tab active" data-tab="login">Log in</button>
+            <button class="profile-tab" data-tab="signup">Create profile</button>
+          </div>
+
+          <form class="profile-form active" id="loginForm" data-form="login">
+            <div class="field">
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" type="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="loginPassword">Password</label>
+              <input id="loginPassword" type="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log in</button>
+          </form>
+
+          <form class="profile-form" id="signupForm" data-form="signup">
+            <div class="row2">
+              <div class="field">
+                <label for="suName">Full name</label>
+                <input id="suName" type="text" placeholder="Jane Doe" required>
+              </div>
+              <div class="field">
+                <label for="suCountry">Country</label>
+                <input id="suCountry" type="text" placeholder="Where you're based" required>
+              </div>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="suEmail">Email</label>
+                <input id="suEmail" type="email" placeholder="you@email.com" required>
+              </div>
+              <div class="field">
+                <label for="suPhone">Phone</label>
+                <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
+              </div>
+            </div>
+            <div class="field">
+              <label for="suCategory">Role category you're interested in</label>
+              <select id="suCategory">
+                <option>Bookkeeping (QBOA)</option>
+                <option>Call Center</option>
+                <option>Sales</option>
+                <option>Healthcare Support</option>
+                <option>Interpretation</option>
+                <option>Other / Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="suResume">Resume / CV</label>
+              <input id="suResume" type="file">
+            </div>
+            <div class="field">
+              <label for="suPassword">Create a password</label>
+              <input id="suPassword" type="password" placeholder="••••••••" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary">Create profile</button>
+          </form>
         </div>
 
-        <form class="profile-form active" id="loginForm" data-form="login">
-          <div class="field">
-            <label for="loginEmail">Email</label>
-            <input id="loginEmail" type="email" placeholder="you@email.com" required>
+        <div id="accountView" style="display:none;">
+          <span class="eyebrow">Logged in</span>
+          <h2 style="margin-top:10px;">Welcome back</h2>
+          <div class="info-card" style="margin-top:22px; background:var(--ink);">
+            <span class="eyebrow" style="color:#6FE0C7;">Applicant profile</span>
+            <h3 id="accName" style="margin:14px 0 22px;">—</h3>
+            <div class="info-line"><span>EMAIL</span><span id="accEmail">—</span></div>
+            <div class="info-line"><span>COUNTRY</span><span id="accCountry">—</span></div>
+            <div class="info-line"><span>PHONE</span><span id="accPhone">—</span></div>
+            <div class="info-line"><span>CATEGORY</span><span id="accCategory">—</span></div>
+            <div class="info-line" id="accResumeLine" style="border-bottom:none;"><span>RESUME</span><span>—</span></div>
           </div>
-          <div class="field">
-            <label for="loginPassword">Password</label>
-            <input id="loginPassword" type="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Log in</button>
-          <p class="profile-note">Demo form — account access isn't connected yet.</p>
-        </form>
-
-        <form class="profile-form" id="signupForm" data-form="signup">
-          <div class="row2">
-            <div class="field">
-              <label for="suName">Full name</label>
-              <input id="suName" type="text" placeholder="Jane Doe" required>
-            </div>
-            <div class="field">
-              <label for="suCountry">Country</label>
-              <input id="suCountry" type="text" placeholder="Where you're based" required>
-            </div>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label for="suEmail">Email</label>
-              <input id="suEmail" type="email" placeholder="you@email.com" required>
-            </div>
-            <div class="field">
-              <label for="suPhone">Phone</label>
-              <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
-            </div>
-          </div>
-          <div class="field">
-            <label for="suCategory">Role category you're interested in</label>
-            <select id="suCategory">
-              <option>Bookkeeping (QBOA)</option>
-              <option>Call Center</option>
-              <option>Sales</option>
-              <option>Healthcare Support</option>
-              <option>Interpretation</option>
-              <option>Other / Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="suResume">Resume / CV</label>
-            <input id="suResume" type="file">
-          </div>
-          <div class="field">
-            <label for="suPassword">Create a password</label>
-            <input id="suPassword" type="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Create profile</button>
-          <p class="profile-note">Demo form — profiles aren't saved yet.</p>
-        </form>
+          <button id="logoutBtn" class="btn btn-ghost" style="margin-top:22px;">Log out</button>
+        </div>
       </div>
     </div>
   </section>
@@ -155,6 +170,9 @@
 </footer>
 
 <script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="profile-auth.js"></script>
 <script>
   const profileTabs = document.querySelectorAll('.profile-tab');
   profileTabs.forEach(tab => {
@@ -163,17 +181,6 @@
       tab.classList.add('active');
       document.querySelectorAll('.profile-form').forEach(f => f.classList.remove('active'));
       document.querySelector(`.profile-form[data-form="${tab.dataset.tab}"]`).classList.add('active');
-    });
-  });
-
-  ['loginForm', 'signupForm'].forEach(id => {
-    document.getElementById(id).addEventListener('submit', function(e){
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      const original = btn.textContent;
-      btn.textContent = id === 'loginForm' ? 'Logged in ✓' : 'Profile created ✓';
-      btn.style.background = 'var(--ledger-deep)';
-      setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
     });
   });
 </script>
