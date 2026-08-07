@@ -59,30 +59,30 @@
 
   <section>
     <div class="wrap contact-grid">
-      <form id="contactForm" class="reveal">
+      <form id="contactForm" class="reveal" action="https://formspree.io/f/mvkpgjkd" method="POST">
         <div class="row2">
           <div class="field">
             <label for="name">Full name</label>
-            <input id="name" type="text" placeholder="Jane Doe" required>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required>
           </div>
           <div class="field">
             <label for="company">Company</label>
-            <input id="company" type="text" placeholder="Your business name">
+            <input id="company" name="company" type="text" placeholder="Your business name">
           </div>
         </div>
         <div class="row2">
           <div class="field">
             <label for="email">Email</label>
-            <input id="email" type="email" placeholder="you@company.com" required>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
           </div>
           <div class="field">
             <label for="phone">Phone</label>
-            <input id="phone" type="tel" placeholder="(000) 000-0000">
+            <input id="phone" name="phone" type="tel" placeholder="(000) 000-0000">
           </div>
         </div>
         <div class="field">
           <label for="service">Service you're interested in</label>
-          <select id="service">
+          <select id="service" name="service">
             <option>Bookkeeping (QBOA)</option>
             <option>Call Center</option>
             <option>Sales</option>
@@ -93,7 +93,7 @@
         </div>
         <div class="field">
           <label for="message">Message</label>
-          <textarea id="message" placeholder="A few details about what you need help with..."></textarea>
+          <textarea id="message" name="message" placeholder="A few details about what you need help with..."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send request</button>
       </form>
@@ -138,13 +138,34 @@
 
 <script src="nav.js"></script>
 <script>
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', async function(e){
     e.preventDefault();
     const btn = this.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    btn.textContent = 'Request sent ✓';
-    btn.style.background = 'var(--ledger-deep)';
-    setTimeout(() => { btn.textContent = original; btn.style.background = ''; this.reset(); }, 2600);
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        btn.textContent = 'Request sent ✓';
+        btn.style.background = 'var(--ledger-deep)';
+        contactForm.reset();
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#C4433A';
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#C4433A';
+    }
+
+    setTimeout(() => { btn.disabled = false; btn.textContent = original; btn.style.background = ''; }, 3200);
   });
 </script>
 </body>

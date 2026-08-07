@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — FMPH Multiservices LLC</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .admin-login{max-width:420px; margin:0 auto;}
+  .admin-toolbar{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:28px;}
+  .admin-stat{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft);}
+  table.admin-table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.admin-table th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); border-bottom:1px solid var(--ink); padding:10px 12px; white-space:nowrap;
+  }
+  table.admin-table td{border-bottom:1px solid var(--line); padding:12px; vertical-align:top;}
+  table.admin-table tr:hover td{background:var(--paper-raised);}
+  .admin-empty{padding:40px; text-align:center; color:var(--ink-soft); border:1px dashed var(--line); border-radius:2px;}
+  .admin-pill{font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 9px; border-radius:20px; background:var(--paper-raised); border:1px solid var(--line); white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+      <span class="logo-text">
+        <span class="mark">FMPH</span>
+        <span class="sub">Multiservices LLC</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="join-our-talent.html">Join Our Talent</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="my-profile.html" class="btn btn-ghost">My Profile</a>
+      <a href="contact.html" class="btn btn-primary">Request a consultation</a>
+      <button class="navbtn" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 32px 20px;">
+    <a href="about.html" style="padding:12px 0; border-bottom:1px solid var(--line);">About</a>
+    <a href="index.html#services" style="padding:12px 0; border-bottom:1px solid var(--line);">Services</a>
+    <a href="join-our-talent.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Join Our Talent</a>
+    <a href="careers.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Careers</a>
+    <a href="blog.html" style="padding:12px 0; border-bottom:1px solid var(--line);">Blog</a>
+    <a href="my-profile.html" style="padding:12px 0; border-bottom:1px solid var(--line);">My Profile</a>
+    <a href="contact.html" style="padding:12px 0;">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Admin</span>
+      <h1>Applications dashboard</h1>
+      <p>Private page — log in with the FMPH admin account to view every application received.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+
+      <div id="adminLogin" class="admin-login">
+        <form id="adminLoginForm">
+          <div class="field">
+            <label for="adminEmail">Admin email</label>
+            <input id="adminEmail" type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="adminPassword">Password</label>
+            <input id="adminPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+      </div>
+
+      <div id="adminPanel" style="display:none;">
+        <div class="admin-toolbar">
+          <span class="admin-stat" id="adminStat">Loading…</span>
+          <button id="adminLogoutBtn" class="btn btn-ghost">Log out</button>
+        </div>
+        <div id="adminTableWrap"></div>
+        <div class="admin-empty" id="adminEmpty" style="display:none;">No applications yet — or this account doesn't have admin access.</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="index.html" class="logo">
+        <img src="logo-icon.png" alt="FMPH Multiservices LLC logo" class="logo-icon">
+        <span class="logo-text">
+          <span class="mark">FMPH</span>
+          <span class="sub">Multiservices LLC</span>
+        </span>
+      </a>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="join-our-talent.html">Join Our Talent</a>
+        <a href="careers.html">Careers</a>
+        <a href="blog.html">Blog</a>
+        <a href="my-profile.html">My Profile</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© <span id="year"></span> FMPH Multiservices LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="admin-auth.js"></script>
+</body>
+</html>
