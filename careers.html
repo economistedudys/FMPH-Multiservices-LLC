@@ -107,16 +107,16 @@
 <script src="nav.js"></script>
 <script>
   const jobs = [
-    { code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', seed: 'fmph-job-callcenter-agent' },
-    { code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', seed: 'fmph-job-afterhours' },
-    { code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', seed: 'fmph-job-retention' },
-    { code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', seed: 'fmph-job-bookkeeper' },
-    { code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', seed: 'fmph-job-ap-specialist' },
-    { code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', seed: 'fmph-job-sales-rep' },
-    { code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', seed: 'fmph-job-medical-answering' },
-    { code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', seed: 'fmph-job-interpreter-es' },
-    { code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', seed: 'fmph-job-interpreter-ht' },
-    { code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', seed: 'fmph-job-virtual-assistant' }
+    { id: 'cc-bilingual-agent', code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', seed: 'fmph-job-callcenter-agent' },
+    { id: 'cc-afterhours', code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', seed: 'fmph-job-afterhours' },
+    { id: 'cc-retention', code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', seed: 'fmph-job-retention' },
+    { id: 'bk-bookkeeper', code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', seed: 'fmph-job-bookkeeper' },
+    { id: 'bk-ap-specialist', code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', seed: 'fmph-job-ap-specialist' },
+    { id: 'sl-sales-rep', code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', seed: 'fmph-job-sales-rep' },
+    { id: 'hc-medical-answering', code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', seed: 'fmph-job-medical-answering' },
+    { id: 'in-interpreter-es', code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', seed: 'fmph-job-interpreter-es' },
+    { id: 'in-interpreter-ht', code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', seed: 'fmph-job-interpreter-ht' },
+    { id: 'xs-virtual-assistant', code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', seed: 'fmph-job-virtual-assistant' }
   ];
   const categoryNames = { BK: 'Bookkeeping', CC: 'Call Center', SL: 'Sales', HC: 'Healthcare Support', IN: 'Interpretation', XS: 'Additional Services' };
 
@@ -125,13 +125,15 @@
   const careerFilterLabel = document.getElementById('careerFilterLabel');
   const clearFilterBtn = document.getElementById('clearFilter');
 
-  function renderJobs(filterCode){
+  function renderJobs(filterCode, highlightId){
     careerGrid.innerHTML = '';
     const list = filterCode ? jobs.filter(j => j.code === filterCode) : jobs;
     careerEmpty.style.display = list.length ? 'none' : 'block';
     list.forEach(j => {
       const card = document.createElement('div');
       card.className = 'job-card';
+      card.id = `job-${j.id}`;
+      if (j.id === highlightId) card.style.outline = '2px solid var(--ledger)';
       card.innerHTML = `
         <img src="https://picsum.photos/seed/${j.seed}/500/320" alt="${j.title} at FMPH Multiservices">
         <div class="job-body">
@@ -139,22 +141,30 @@
           <h3>${j.title}</h3>
           <div class="job-meta"><span class="badge-worldwide">🌍 Worldwide · Remote</span></div>
           <p class="job-blurb">${j.blurb}</p>
-          <a href="my-profile.html" class="btn btn-primary">Apply now</a>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <a href="my-profile.html?apply=${j.id}&title=${encodeURIComponent(j.title)}&cat=${j.code}" class="btn btn-primary">Apply now</a>
+            <a href="careers.html?job=${j.id}#job-${j.id}" style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); text-decoration:none;" title="Copy this link to share this specific posting">🔗 Link to this posting</a>
+          </div>
         </div>
       `;
       careerGrid.appendChild(card);
     });
+    if (highlightId) {
+      const el = document.getElementById(`job-${highlightId}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   const params = new URLSearchParams(window.location.search);
   const initialCode = params.get('cat');
+  const jobParam = params.get('job');
 
   if (initialCode && categoryNames[initialCode]) {
     careerFilterLabel.childNodes[0].textContent = `Showing ${categoryNames[initialCode]} roles `;
     clearFilterBtn.style.display = 'inline-block';
-    renderJobs(initialCode);
+    renderJobs(initialCode, jobParam);
   } else {
-    renderJobs(null);
+    renderJobs(null, jobParam);
   }
 
   clearFilterBtn.addEventListener('click', () => {

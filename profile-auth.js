@@ -21,12 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const applyConfirmTitle = document.getElementById('applyConfirmTitle');
   const applyConfirmBtn = document.getElementById('applyConfirmBtn');
 
-  // ---------- pending application (from ?apply=CODE&title=...) ----------
+  // ---------- pending application (from ?apply=ID&title=...&cat=CODE) ----------
   const params = new URLSearchParams(window.location.search);
-  const applyCode = params.get('apply');
+  const applyId = params.get('apply');
   const applyTitle = params.get('title');
-  if (applyCode && applyTitle) {
-    sessionStorage.setItem('pendingApplication', JSON.stringify({ code: applyCode, title: applyTitle }));
+  const applyCat = params.get('cat');
+  if (applyId && applyTitle) {
+    sessionStorage.setItem('pendingApplication', JSON.stringify({ id: applyId, title: applyTitle, cat: applyCat || '' }));
   }
   function getPendingApplication(){
     const raw = sessionStorage.getItem('pendingApplication');
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listEl = document.getElementById('applicationsList');
     const { data, error } = await sb
       .from('applications')
-      .select('job_code, job_title, applied_at')
+      .select('job_id, job_title, job_category, status, applied_at')
       .eq('candidate_id', userId)
       .order('applied_at', { ascending: false });
 
@@ -66,15 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
       return [];
     }
 
-    listEl.innerHTML = data.map(a => `
-      <div style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:2px; padding:12px 14px;">
+    const statusColors = {
+      'Submitted': { bg: 'rgba(14,124,107,.12)', text: 'var(--ledger-deep)' },
+      'Under Review': { bg: 'rgba(42,111,176,.12)', text: '#2A6FB0' },
+      'Interview': { bg: 'rgba(217,103,63,.14)', text: 'var(--amber)' },
+      'Offer': { bg: 'rgba(14,124,107,.18)', text: 'var(--ledger-deep)' },
+      'Hired': { bg: 'rgba(14,124,107,.22)', text: 'var(--ledger-deep)' },
+      'Not Selected': { bg: 'rgba(196,67,58,.12)', text: '#C4433A' }
+    };
+
+    listEl.innerHTML = data.map(a => {
+      const s = statusColors[a.status] || statusColors['Submitted'];
+      return `
+      <div style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:2px; padding:12px 14px; gap:12px;">
         <div>
           <div style="font-weight:600; font-size:14px;">${a.job_title}</div>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);">${a.job_code} · Applied ${new Date(a.applied_at).toLocaleDateString()}</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);">${a.job_category || ''} · Applied ${new Date(a.applied_at).toLocaleDateString()}</div>
         </div>
-        <span class="badge-worldwide">Submitted</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; border-radius:20px; white-space:nowrap; background:${s.bg}; color:${s.text};">${a.status || 'Submitted'}</span>
       </div>
-    `).join('');
+    `;
+    }).join('');
     return data;
   }
 
@@ -83,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!pending) { applyConfirm.style.display = 'none'; return; }
 
     const existing = await loadApplications(userId);
-    const alreadyApplied = existing.some(a => a.job_code === pending.code);
+    const alreadyApplied = existing.some(a => a.job_id === pending.id);
     if (alreadyApplied) {
       sessionStorage.removeItem('pendingApplication');
       applyConfirm.style.display = 'none';
@@ -105,8 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const { error } = await sb.from('applications').insert({
       candidate_id: user.id,
-      job_code: pending.code,
-      job_title: pending.title
+      job_id: pending.id,
+      job_title: pending.title,
+      job_category: pending.cat,
+      status: 'Submitted'
     });
 
     if (!error) {
