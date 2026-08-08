@@ -66,7 +66,7 @@
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="worldwide-banner reveal">
-        <img src="https://picsum.photos/seed/fmph-worldwide-map/1400/600" alt="Remote team working from locations around the world">
+        <img src="images/worldwide-map.svg" alt="Remote team working from locations around the world">
         <div class="worldwide-content">
           <span class="eyebrow">Worldwide · Remote-first</span>
           <h3>We hire worldwide. Work from anywhere in the world.</h3>
@@ -109,12 +109,12 @@
 <script src="nav.js"></script>
 <script>
   const talentCategories = [
-    { code: 'BK', title: 'Bookkeeping', seed: 'fmph-talent-bookkeeping', count: '2 open roles' },
-    { code: 'CC', title: 'Call Center', seed: 'fmph-talent-callcenter', count: '3 open roles' },
-    { code: 'SL', title: 'Sales', seed: 'fmph-talent-sales', count: '1 open role' },
-    { code: 'HC', title: 'Healthcare Support', seed: 'fmph-talent-healthcare', count: '1 open role' },
-    { code: 'IN', title: 'Interpretation', seed: 'fmph-talent-interpretation', count: '2 open roles' },
-    { code: 'XS', title: 'Additional Services', seed: 'fmph-talent-additional', count: '1 open role' }
+    { code: 'BK', title: 'Bookkeeping', img: 'images/talent-bookkeeping.svg', count: '2 open roles' },
+    { code: 'CC', title: 'Call Center', img: 'images/talent-callcenter.svg', count: '3 open roles' },
+    { code: 'SL', title: 'Sales', img: 'images/talent-sales.svg', count: '1 open role' },
+    { code: 'HC', title: 'Healthcare Support', img: 'images/talent-healthcare.svg', count: '1 open role' },
+    { code: 'IN', title: 'Interpretation', img: 'images/talent-interpretation.svg', count: '2 open roles' },
+    { code: 'XS', title: 'Additional Services', img: 'images/talent-additional.svg', count: '1 open role' }
   ];
   const talentGrid = document.getElementById('talentGrid');
   talentCategories.forEach(cat => {
@@ -123,7 +123,7 @@
     card.className = 'talent-card';
     card.style.display = 'block';
     card.innerHTML = `
-      <img src="https://picsum.photos/seed/${cat.seed}/500/380" alt="${cat.title} roles at FMPH Multiservices">
+      <img src="${cat.img}" alt="${cat.title} roles at FMPH Multiservices">
       <div class="talent-info">
         <div class="talent-code">${cat.code} — WORLDWIDE</div>
         <h3>${cat.title}</h3>

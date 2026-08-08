@@ -1,0 +1,7 @@
+<svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="380" fill="#E4F1EE"/>
+  <path d="M120 120 h160 a20 20 0 0 1 20 20 v80 a20 20 0 0 1 -20 20 h-100 l-35 35 v-35 h-25 a20 20 0 0 1 -20 -20 v-80 a20 20 0 0 1 20 -20 Z" fill="#0E7C6B"/>
+  <text x="195" y="195" font-family="serif" font-size="42" fill="#F5F7F7" text-anchor="middle" font-weight="bold">A</text>
+  <path d="M240 180 h160 a20 20 0 0 1 20 20 v80 a20 20 0 0 1 -20 20 h-25 v35 l-35 -35 h-100 a20 20 0 0 1 -20 -20 v-80 a20 20 0 0 1 20 -20 Z" fill="#D9673F"/>
+  <text x="330" y="255" font-family="serif" font-size="42" fill="#F5F7F7" text-anchor="middle" font-weight="bold">文</text>
+</svg>

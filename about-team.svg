@@ -1,0 +1,16 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#F5F7F7"/>
+  <circle cx="400" cy="430" r="230" fill="#E4F1EE"/>
+  <!-- back person -->
+  <circle cx="290" cy="360" r="60" fill="#141B1E" opacity="0.15"/>
+  <path d="M170 560 Q170 430 290 430 Q410 430 410 560 L410 620 L170 620 Z" fill="#141B1E" opacity="0.15"/>
+  <!-- right person -->
+  <circle cx="510" cy="360" r="60" fill="#D9673F" opacity="0.85"/>
+  <path d="M390 560 Q390 430 510 430 Q630 430 630 560 L630 630 L390 630 Z" fill="#D9673F" opacity="0.85"/>
+  <!-- front/center person -->
+  <circle cx="400" cy="390" r="78" fill="#0E7C6B"/>
+  <path d="M255 620 Q255 460 400 460 Q545 460 545 620 L545 700 L255 700 Z" fill="#0E7C6B"/>
+  <!-- ledger line accents -->
+  <line x1="150" y1="760" x2="650" y2="760" stroke="#141B1E" stroke-width="2" stroke-dasharray="6 10" opacity="0.35"/>
+  <line x1="150" y1="800" x2="650" y2="800" stroke="#141B1E" stroke-width="2" stroke-dasharray="6 10" opacity="0.2"/>
+</svg>

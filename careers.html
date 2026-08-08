@@ -60,7 +60,7 @@
   <section>
     <div class="wrap">
       <div class="worldwide-banner reveal">
-        <img src="https://picsum.photos/seed/fmph-worldwide-map/1400/600" alt="Remote team working from locations around the world">
+        <img src="images/worldwide-map.svg" alt="Remote team working from locations around the world">
         <div class="worldwide-content">
           <span class="eyebrow">Worldwide · Remote-first</span>
           <h3>We hire worldwide. Work from anywhere in the world.</h3>
@@ -107,16 +107,16 @@
 <script src="nav.js"></script>
 <script>
   const jobs = [
-    { id: 'cc-bilingual-agent', code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', seed: 'fmph-job-callcenter-agent' },
-    { id: 'cc-afterhours', code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', seed: 'fmph-job-afterhours' },
-    { id: 'cc-retention', code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', seed: 'fmph-job-retention' },
-    { id: 'bk-bookkeeper', code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', seed: 'fmph-job-bookkeeper' },
-    { id: 'bk-ap-specialist', code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', seed: 'fmph-job-ap-specialist' },
-    { id: 'sl-sales-rep', code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', seed: 'fmph-job-sales-rep' },
-    { id: 'hc-medical-answering', code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', seed: 'fmph-job-medical-answering' },
-    { id: 'in-interpreter-es', code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', seed: 'fmph-job-interpreter-es' },
-    { id: 'in-interpreter-ht', code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', seed: 'fmph-job-interpreter-ht' },
-    { id: 'xs-virtual-assistant', code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', seed: 'fmph-job-virtual-assistant' }
+    { id: 'cc-bilingual-agent', code: 'CC', title: 'Bilingual Call Center Agent', type: 'Full-time', blurb: 'Handle inbound support and scheduling for U.S.-based clients, in English and Spanish or Haitian Creole.', img: 'images/talent-callcenter.svg' },
+    { id: 'cc-afterhours', code: 'CC', title: 'After-Hours Support Agent', type: 'Part-time', blurb: 'Cover evening and weekend call overflow so our clients never miss a customer.', img: 'images/talent-callcenter.svg' },
+    { id: 'cc-retention', code: 'CC', title: 'Customer Retention Specialist', type: 'Full-time', blurb: 'Follow up with existing customers to resolve issues and keep accounts active.', img: 'images/talent-callcenter.svg' },
+    { id: 'bk-bookkeeper', code: 'BK', title: 'QBOA Bookkeeper', type: 'Full-time', blurb: 'Manage reconciliations, invoicing, and monthly reporting for a portfolio of small business clients.', img: 'images/talent-bookkeeping.svg' },
+    { id: 'bk-ap-specialist', code: 'BK', title: 'Accounts Payable Specialist', type: 'Contract', blurb: 'Process bills and vendor payments across multiple client accounts in QuickBooks Online.', img: 'images/talent-bookkeeping.svg' },
+    { id: 'sl-sales-rep', code: 'SL', title: 'Outbound Sales Representative', type: 'Full-time', blurb: 'Run outbound calling campaigns, qualify leads, and book appointments for client sales teams.', img: 'images/talent-sales.svg' },
+    { id: 'hc-medical-answering', code: 'HC', title: 'Medical Answering Specialist', type: 'Part-time', blurb: 'Schedule patient appointments and route intake calls for medical office clients.', img: 'images/talent-healthcare.svg' },
+    { id: 'in-interpreter-es', code: 'IN', title: 'Over-the-Phone Interpreter — Spanish', type: 'Contract', blurb: 'Provide English⇄Spanish interpretation for business and medical calls, on-demand or scheduled.', img: 'images/talent-interpretation.svg' },
+    { id: 'in-interpreter-ht', code: 'IN', title: 'Over-the-Phone Interpreter — Haitian Creole', type: 'Contract', blurb: 'Provide English⇄Haitian Creole interpretation for client calls across industries.', img: 'images/talent-interpretation.svg' },
+    { id: 'xs-virtual-assistant', code: 'XS', title: 'Virtual Assistant', type: 'Full-time', blurb: 'Support back-office tasks — data entry, email management, and light reporting — for client accounts.', img: 'images/talent-additional.svg' }
   ];
   const categoryNames = { BK: 'Bookkeeping', CC: 'Call Center', SL: 'Sales', HC: 'Healthcare Support', IN: 'Interpretation', XS: 'Additional Services' };
 
@@ -135,7 +135,7 @@
       card.id = `job-${j.id}`;
       if (j.id === highlightId) card.style.outline = '2px solid var(--ledger)';
       card.innerHTML = `
-        <img src="https://picsum.photos/seed/${j.seed}/500/320" alt="${j.title} at FMPH Multiservices">
+        <img src="${j.img}" alt="${j.title} at FMPH Multiservices">
         <div class="job-body">
           <span class="job-dept">${j.code} — ${j.type}</span>
           <h3>${j.title}</h3>

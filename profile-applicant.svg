@@ -1,0 +1,20 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#F5F7F7"/>
+  <circle cx="400" cy="440" r="230" fill="#E4F1EE"/>
+  <!-- laptop base -->
+  <rect x="230" y="500" width="340" height="18" rx="6" fill="#141B1E"/>
+  <path d="M260 500 L280 350 Q282 336 296 336 L504 336 Q518 336 520 350 L540 500 Z" fill="#141B1E"/>
+  <rect x="296" y="356" width="208" height="124" rx="4" fill="#F5F7F7"/>
+  <!-- resume lines on screen -->
+  <rect x="316" y="376" width="120" height="10" rx="3" fill="#0E7C6B"/>
+  <rect x="316" y="398" width="168" height="7" rx="3" fill="#141B1E" opacity="0.35"/>
+  <rect x="316" y="414" width="168" height="7" rx="3" fill="#141B1E" opacity="0.35"/>
+  <rect x="316" y="430" width="120" height="7" rx="3" fill="#141B1E" opacity="0.35"/>
+  <rect x="316" y="452" width="70" height="18" rx="4" fill="#D9673F"/>
+  <!-- floating check badge -->
+  <circle cx="540" cy="320" r="42" fill="#D9673F"/>
+  <path d="M520 320 L534 334 L562 304" stroke="#F5F7F7" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ledger accents -->
+  <line x1="150" y1="760" x2="650" y2="760" stroke="#141B1E" stroke-width="2" stroke-dasharray="6 10" opacity="0.35"/>
+  <line x1="150" y1="800" x2="650" y2="800" stroke="#141B1E" stroke-width="2" stroke-dasharray="6 10" opacity="0.2"/>
+</svg>

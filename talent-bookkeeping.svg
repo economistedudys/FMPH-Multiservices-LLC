@@ -1,0 +1,21 @@
+<svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="380" fill="#E4F1EE"/>
+  <rect x="150" y="60" width="200" height="260" rx="6" fill="#F5F7F7" stroke="#141B1E" stroke-width="3"/>
+  <line x1="150" y1="110" x2="350" y2="110" stroke="#141B1E" stroke-width="2" opacity="0.5"/>
+  <line x1="180" y1="60" x2="180" y2="320" stroke="#141B1E" stroke-width="2" opacity="0.25"/>
+  <line x1="320" y1="60" x2="320" y2="320" stroke="#141B1E" stroke-width="2" opacity="0.25"/>
+  <g fill="#0E7C6B">
+    <rect x="195" y="135" width="60" height="8" rx="3"/>
+    <rect x="195" y="165" width="60" height="8" rx="3"/>
+    <rect x="195" y="195" width="60" height="8" rx="3"/>
+    <rect x="195" y="225" width="60" height="8" rx="3"/>
+  </g>
+  <g fill="#141B1E" opacity="0.55">
+    <rect x="270" y="135" width="45" height="8" rx="3"/>
+    <rect x="270" y="165" width="45" height="8" rx="3"/>
+    <rect x="270" y="195" width="45" height="8" rx="3"/>
+  </g>
+  <path d="M270 225 L280 235 L300 210" stroke="#D9673F" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="350" cy="290" r="46" fill="#D9673F"/>
+  <text x="350" y="303" font-family="monospace" font-size="34" fill="#F5F7F7" text-anchor="middle">$</text>
+</svg>

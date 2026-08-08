@@ -1,0 +1,29 @@
+<svg viewBox="0 0 1400 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="600" fill="#141B1E"/>
+  <g opacity="0.5">
+    <circle cx="150" cy="120" r="2.5" fill="#0E7C6B"/><circle cx="180" cy="150" r="2.5" fill="#0E7C6B"/><circle cx="210" cy="130" r="2.5" fill="#0E7C6B"/>
+    <circle cx="260" cy="180" r="2.5" fill="#0E7C6B"/><circle cx="300" cy="160" r="2.5" fill="#0E7C6B"/><circle cx="330" cy="200" r="2.5" fill="#0E7C6B"/>
+    <circle cx="380" cy="140" r="2.5" fill="#0E7C6B"/><circle cx="420" cy="190" r="2.5" fill="#0E7C6B"/><circle cx="460" cy="150" r="2.5" fill="#0E7C6B"/>
+    <circle cx="520" cy="220" r="2.5" fill="#0E7C6B"/><circle cx="560" cy="180" r="2.5" fill="#0E7C6B"/><circle cx="600" cy="240" r="2.5" fill="#0E7C6B"/>
+    <circle cx="650" cy="200" r="2.5" fill="#0E7C6B"/><circle cx="690" cy="260" r="2.5" fill="#0E7C6B"/><circle cx="730" cy="220" r="2.5" fill="#0E7C6B"/>
+    <circle cx="780" cy="280" r="2.5" fill="#0E7C6B"/><circle cx="820" cy="240" r="2.5" fill="#0E7C6B"/><circle cx="860" cy="300" r="2.5" fill="#0E7C6B"/>
+    <circle cx="910" cy="260" r="2.5" fill="#0E7C6B"/><circle cx="950" cy="320" r="2.5" fill="#0E7C6B"/><circle cx="1000" cy="280" r="2.5" fill="#0E7C6B"/>
+    <circle cx="1050" cy="340" r="2.5" fill="#0E7C6B"/><circle cx="1090" cy="300" r="2.5" fill="#0E7C6B"/><circle cx="1140" cy="360" r="2.5" fill="#0E7C6B"/>
+    <circle cx="200" cy="260" r="2.5" fill="#0E7C6B"/><circle cx="240" cy="300" r="2.5" fill="#0E7C6B"/><circle cx="280" cy="340" r="2.5" fill="#0E7C6B"/>
+    <circle cx="340" cy="380" r="2.5" fill="#0E7C6B"/><circle cx="400" cy="330" r="2.5" fill="#0E7C6B"/><circle cx="460" cy="390" r="2.5" fill="#0E7C6B"/>
+    <circle cx="520" cy="360" r="2.5" fill="#0E7C6B"/><circle cx="590" cy="400" r="2.5" fill="#0E7C6B"/><circle cx="650" cy="360" r="2.5" fill="#0E7C6B"/>
+    <circle cx="720" cy="410" r="2.5" fill="#0E7C6B"/><circle cx="790" cy="370" r="2.5" fill="#0E7C6B"/><circle cx="860" cy="420" r="2.5" fill="#0E7C6B"/>
+    <circle cx="930" cy="380" r="2.5" fill="#0E7C6B"/><circle cx="1000" cy="430" r="2.5" fill="#0E7C6B"/><circle cx="1070" cy="390" r="2.5" fill="#0E7C6B"/>
+  </g>
+  <!-- connection arcs -->
+  <path d="M260 200 Q500 60 780 260" stroke="#D9673F" stroke-width="2" fill="none" stroke-dasharray="4 8" opacity="0.7"/>
+  <path d="M420 350 Q650 480 950 340" stroke="#D9673F" stroke-width="2" fill="none" stroke-dasharray="4 8" opacity="0.7"/>
+  <path d="M200 260 Q400 480 780 400" stroke="#0E7C6B" stroke-width="2" fill="none" stroke-dasharray="4 8" opacity="0.6"/>
+  <!-- location pins -->
+  <g>
+    <circle cx="260" cy="200" r="9" fill="#D9673F"/><circle cx="260" cy="200" r="16" fill="none" stroke="#D9673F" stroke-width="2" opacity="0.5"/>
+    <circle cx="780" cy="260" r="9" fill="#D9673F"/><circle cx="780" cy="260" r="16" fill="none" stroke="#D9673F" stroke-width="2" opacity="0.5"/>
+    <circle cx="950" cy="340" r="9" fill="#0E7C6B"/><circle cx="950" cy="340" r="16" fill="none" stroke="#0E7C6B" stroke-width="2" opacity="0.5"/>
+    <circle cx="420" cy="350" r="9" fill="#0E7C6B"/><circle cx="420" cy="350" r="16" fill="none" stroke="#0E7C6B" stroke-width="2" opacity="0.5"/>
+  </g>
+</svg>
