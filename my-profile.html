@@ -63,6 +63,12 @@
         <img src="https://picsum.photos/seed/fmph-profile-applicant/800/1000" alt="Applicant reviewing their profile on a laptop">
       </div>
       <div class="reveal">
+        <div id="applyBanner" style="display:none; border:1px solid var(--ledger); background:var(--paper-raised); padding:16px 18px; border-radius:2px; margin-bottom:22px;">
+          <span class="eyebrow" style="margin-bottom:6px;">Applying to</span>
+          <p style="margin:0; font-weight:600; font-size:15px;" id="applyBannerTitle"></p>
+          <p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-soft);" id="applyBannerNote">Log in or create a profile below to complete your application.</p>
+        </div>
+
         <div id="formsView">
           <div class="profile-tabs">
             <button class="profile-tab active" data-tab="login">Log in</button>
@@ -113,6 +119,35 @@
                 <option>Other / Not sure yet</option>
               </select>
             </div>
+            <div class="row2">
+              <div class="field">
+                <label for="suExperience">Years of experience</label>
+                <select id="suExperience">
+                  <option>Less than 1 year</option>
+                  <option>1–2 years</option>
+                  <option>3–5 years</option>
+                  <option>6–10 years</option>
+                  <option>10+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="suAvailability">Availability</label>
+                <select id="suAvailability">
+                  <option>Full-time</option>
+                  <option>Part-time</option>
+                  <option>Contract</option>
+                  <option>Flexible</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="suLinkedin">LinkedIn or portfolio link (optional)</label>
+              <input id="suLinkedin" type="url" placeholder="https://linkedin.com/in/yourname">
+            </div>
+            <div class="field">
+              <label for="suMessage">A little about you</label>
+              <textarea id="suMessage" placeholder="Relevant experience, languages you speak, what you're looking for..." rows="4"></textarea>
+            </div>
             <div class="field">
               <label for="suResume">Resume / CV</label>
               <input id="suResume" type="file">
@@ -128,6 +163,12 @@
         <div id="accountView" style="display:none;">
           <span class="eyebrow">Logged in</span>
           <h2 style="margin-top:10px;">Welcome back</h2>
+
+          <div id="applyConfirm" style="display:none; border:1px solid var(--ledger); background:var(--paper-raised); padding:16px 18px; border-radius:2px; margin:20px 0;">
+            <p style="margin:0 0 10px; font-size:14.5px;">Apply to <strong id="applyConfirmTitle"></strong> with this profile?</p>
+            <button id="applyConfirmBtn" class="btn btn-primary" style="padding:9px 18px; font-size:13px;">Confirm application</button>
+          </div>
+
           <div class="info-card" style="margin-top:22px; background:var(--ink);">
             <span class="eyebrow" style="color:#6FE0C7;">Applicant profile</span>
             <h3 id="accName" style="margin:14px 0 22px;">—</h3>
@@ -135,9 +176,24 @@
             <div class="info-line"><span>COUNTRY</span><span id="accCountry">—</span></div>
             <div class="info-line"><span>PHONE</span><span id="accPhone">—</span></div>
             <div class="info-line"><span>CATEGORY</span><span id="accCategory">—</span></div>
+            <div class="info-line"><span>EXPERIENCE</span><span id="accExperience">—</span></div>
+            <div class="info-line"><span>AVAILABILITY</span><span id="accAvailability">—</span></div>
+            <div class="info-line"><span>LINKEDIN</span><span id="accLinkedin">—</span></div>
             <div class="info-line" id="accResumeLine" style="border-bottom:none;"><span>RESUME</span><span>—</span></div>
           </div>
-          <button id="logoutBtn" class="btn btn-ghost" style="margin-top:22px;">Log out</button>
+          <div id="accMessageWrap" style="display:none; margin-top:18px; padding:16px 18px; border:1px solid var(--line); border-radius:2px; background:var(--paper-raised);">
+            <span class="eyebrow">About you</span>
+            <p id="accMessage" style="margin:10px 0 0; font-size:14px; color:var(--ink-soft); white-space:pre-wrap;"></p>
+          </div>
+
+          <div style="margin-top:26px;">
+            <span class="eyebrow">My applications</span>
+            <div id="applicationsList" style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
+              <p style="color:var(--ink-soft); font-size:14px;">No applications yet.</p>
+            </div>
+          </div>
+
+          <button id="logoutBtn" class="btn btn-ghost" style="margin-top:26px;">Log out</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 // Real account system for My Profile, backed by Supabase (Auth + Database + Storage).
+// Also tracks which job a candidate applies to (via ?apply=CODE&title=... on this page's URL).
 // Requires supabase-config.js (loaded before this file) with a real project URL + anon key.
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabsWrap = document.querySelector('.profile-tabs');
   const accountView = document.getElementById('accountView');
   const formsView = document.getElementById('formsView');
+  const applyBanner = document.getElementById('applyBanner');
+  const applyBannerTitle = document.getElementById('applyBannerTitle');
+  const applyConfirm = document.getElementById('applyConfirm');
+  const applyConfirmTitle = document.getElementById('applyConfirmTitle');
+  const applyConfirmBtn = document.getElementById('applyConfirmBtn');
+
+  // ---------- pending application (from ?apply=CODE&title=...) ----------
+  const params = new URLSearchParams(window.location.search);
+  const applyCode = params.get('apply');
+  const applyTitle = params.get('title');
+  if (applyCode && applyTitle) {
+    sessionStorage.setItem('pendingApplication', JSON.stringify({ code: applyCode, title: applyTitle }));
+  }
+  function getPendingApplication(){
+    const raw = sessionStorage.getItem('pendingApplication');
+    return raw ? JSON.parse(raw) : null;
+  }
 
   // ---------- helpers ----------
   function setStatus(form, message, isError){
@@ -35,9 +53,78 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.textContent = isLoading ? 'Please wait…' : label;
   }
 
+  async function loadApplications(userId){
+    const listEl = document.getElementById('applicationsList');
+    const { data, error } = await sb
+      .from('applications')
+      .select('job_code, job_title, applied_at')
+      .eq('candidate_id', userId)
+      .order('applied_at', { ascending: false });
+
+    if (error || !data || data.length === 0) {
+      listEl.innerHTML = '<p style="color:var(--ink-soft); font-size:14px;">No applications yet.</p>';
+      return [];
+    }
+
+    listEl.innerHTML = data.map(a => `
+      <div style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:2px; padding:12px 14px;">
+        <div>
+          <div style="font-weight:600; font-size:14px;">${a.job_title}</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);">${a.job_code} · Applied ${new Date(a.applied_at).toLocaleDateString()}</div>
+        </div>
+        <span class="badge-worldwide">Submitted</span>
+      </div>
+    `).join('');
+    return data;
+  }
+
+  async function maybeShowApplyConfirm(userId){
+    const pending = getPendingApplication();
+    if (!pending) { applyConfirm.style.display = 'none'; return; }
+
+    const existing = await loadApplications(userId);
+    const alreadyApplied = existing.some(a => a.job_code === pending.code);
+    if (alreadyApplied) {
+      sessionStorage.removeItem('pendingApplication');
+      applyConfirm.style.display = 'none';
+      return;
+    }
+
+    applyConfirmTitle.textContent = pending.title;
+    applyConfirm.style.display = 'block';
+  }
+
+  applyConfirmBtn.addEventListener('click', async () => {
+    const pending = getPendingApplication();
+    if (!pending) return;
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+
+    applyConfirmBtn.disabled = true;
+    applyConfirmBtn.textContent = 'Submitting…';
+
+    const { error } = await sb.from('applications').insert({
+      candidate_id: user.id,
+      job_code: pending.code,
+      job_title: pending.title
+    });
+
+    if (!error) {
+      sessionStorage.removeItem('pendingApplication');
+      applyConfirm.innerHTML = '<p style="margin:0; color:var(--ledger); font-weight:600;">Application submitted ✓</p>';
+      loadApplications(user.id);
+    } else {
+      applyConfirmBtn.disabled = false;
+      applyConfirmBtn.textContent = 'Confirm application';
+      setStatus(applyConfirm, error.message, true);
+    }
+  });
+
+  // ---------- account view ----------
   async function showAccount(user){
     formsView.style.display = 'none';
     tabsWrap.style.display = 'none';
+    applyBanner.style.display = 'none';
     accountView.style.display = 'block';
 
     const { data: profileData } = await sb.from('profiles').select('*').eq('id', user.id).single();
@@ -47,23 +134,49 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('accCountry').textContent = profileData?.country || '—';
     document.getElementById('accPhone').textContent = profileData?.phone || '—';
     document.getElementById('accCategory').textContent = profileData?.category || '—';
+    document.getElementById('accExperience').textContent = profileData?.years_experience || '—';
+    document.getElementById('accAvailability').textContent = profileData?.availability || '—';
+    const linkedinEl = document.getElementById('accLinkedin');
+    if (profileData?.linkedin_url) {
+      linkedinEl.innerHTML = `<a href="${profileData.linkedin_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View profile →</a>`;
+    } else {
+      linkedinEl.textContent = '—';
+    }
+    const messageWrap = document.getElementById('accMessageWrap');
+    if (profileData?.cover_message) {
+      document.getElementById('accMessage').textContent = profileData.cover_message;
+      messageWrap.style.display = 'block';
+    } else {
+      messageWrap.style.display = 'none';
+    }
     const resumeLine = document.getElementById('accResumeLine');
     if (profileData?.resume_url) {
       resumeLine.innerHTML = `<span>RESUME</span><a href="${profileData.resume_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View file →</a>`;
     } else {
       resumeLine.innerHTML = `<span>RESUME</span><span>Not uploaded</span>`;
     }
+
+    await maybeShowApplyConfirm(user.id);
   }
 
   function showForms(){
     formsView.style.display = 'block';
     tabsWrap.style.display = 'flex';
     accountView.style.display = 'none';
+
+    const pending = getPendingApplication();
+    if (pending) {
+      applyBannerTitle.textContent = pending.title;
+      applyBanner.style.display = 'block';
+    } else {
+      applyBanner.style.display = 'none';
+    }
   }
 
   // ---------- check existing session on load ----------
   sb.auth.getSession().then(({ data }) => {
     if (data.session) showAccount(data.session.user);
+    else showForms();
   });
 
   // ---------- log in ----------
@@ -95,6 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('suEmail').value.trim();
     const phone = document.getElementById('suPhone').value.trim();
     const category = document.getElementById('suCategory').value;
+    const yearsExperience = document.getElementById('suExperience').value;
+    const availability = document.getElementById('suAvailability').value;
+    const linkedinUrl = document.getElementById('suLinkedin').value.trim();
+    const coverMessage = document.getElementById('suMessage').value.trim();
     const password = document.getElementById('suPassword').value;
     const resumeFile = document.getElementById('suResume').files[0];
 
@@ -125,6 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
         country: country,
         phone: phone,
         category: category,
+        years_experience: yearsExperience,
+        availability: availability,
+        linkedin_url: linkedinUrl || null,
+        cover_message: coverMessage || null,
         resume_url: resumeUrl
       });
     }
@@ -132,11 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setLoading(signupForm, false, 'Create profile');
 
     if (signUpData.session) {
-      // Email confirmation is OFF in the Supabase project → logged in immediately
       setStatus(signupForm, 'Profile created ✓', false);
       showAccount(user);
     } else {
-      // Email confirmation is ON → user must click the link in their inbox first
       setStatus(signupForm, 'Profile created — check your email to confirm your address, then log in.', false);
     }
     signupForm.reset();

@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadApplications(){
     const { data, error } = await sb
       .from('applications')
-      .select('job_code, job_title, applied_at, profiles ( full_name, country, phone, category, resume_url )')
+      .select('job_code, job_title, applied_at, profiles ( full_name, country, phone, category, years_experience, availability, linkedin_url, cover_message, resume_url )')
       .order('applied_at', { ascending: false });
 
     if (error) {
@@ -59,15 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const resume = p.resume_url
         ? `<a href="${p.resume_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View CV →</a>`
         : '—';
+      const linkedin = p.linkedin_url
+        ? `<a href="${p.linkedin_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">Profile →</a>`
+        : '—';
       return `
         <tr>
           <td><strong>${p.full_name || '—'}</strong><br><span style="color:var(--ink-soft); font-size:12px;">${p.country || ''}</span></td>
           <td>${p.phone || '—'}</td>
           <td><span class="admin-pill">${a.job_code}</span><br>${a.job_title}</td>
           <td>${p.category || '—'}</td>
+          <td>${p.years_experience || '—'}<br><span style="color:var(--ink-soft); font-size:12px;">${p.availability || ''}</span></td>
+          <td>${linkedin}</td>
           <td>${resume}</td>
           <td style="white-space:nowrap;">${new Date(a.applied_at).toLocaleDateString()}</td>
         </tr>
+        ${p.cover_message ? `<tr><td colspan="8" style="background:var(--paper-raised); font-size:13px; color:var(--ink-soft); padding:10px 12px;"><strong>Note:</strong> ${p.cover_message}</td></tr>` : ''}
       `;
     }).join('');
 
@@ -79,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <th>Phone</th>
             <th>Applied for</th>
             <th>Category</th>
+            <th>Experience</th>
+            <th>LinkedIn</th>
             <th>Resume</th>
             <th>Date</th>
           </tr>
