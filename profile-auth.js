@@ -1,5 +1,5 @@
 // Real account system for My Profile, backed by Supabase (Auth + Database + Storage).
-// Also tracks which job a candidate applies to (via ?apply=CODE&title=... on this page's URL).
+// Also tracks which job a candidate applies to (via ?apply=ID&title=...&cat=CODE on this page's URL).
 // Requires supabase-config.js (loaded before this file) with a real project URL + anon key.
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,13 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setLoading(form, isLoading, label){
-    const btn = form.querySelector('button[type="submit"]');
+    const btn = form.querySelector('button[type="submit"], button[type="button"].is-submit');
+    if (!btn) return;
     btn.disabled = isLoading;
     btn.textContent = isLoading ? 'Please wait…' : label;
   }
 
+  // ---------- password rule validation (mirrors the visible rules list) ----------
+  function validatePassword(pw){
+    const rules = {
+      len: pw.length >= 8,
+      max: pw.length <= 30,
+      case: /[a-z]/.test(pw) && /[A-Z]/.test(pw),
+      num: /[0-9!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]/.test(pw)
+    };
+    ['len', 'max', 'case', 'num'].forEach(key => {
+      const el = document.getElementById(`rule-${key}`);
+      if (el) el.classList.toggle('ok', rules[key]);
+    });
+    return Object.values(rules).every(Boolean);
+  }
+  const pwField = document.getElementById('suPassword');
+  if (pwField) pwField.addEventListener('input', () => validatePassword(pwField.value));
+
+  // ---------- applications list + jobs applied count ----------
   async function loadApplications(userId){
     const listEl = document.getElementById('applicationsList');
+    const countEl = document.getElementById('jobsAppliedCount');
     const { data, error } = await sb
       .from('applications')
       .select('job_id, job_title, job_category, status, applied_at')
@@ -64,8 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (error || !data || data.length === 0) {
       listEl.innerHTML = '<p style="color:var(--ink-soft); font-size:14px;">No applications yet.</p>';
+      if (countEl) countEl.textContent = '0';
       return [];
     }
+
+    if (countEl) countEl.textContent = String(data.length);
 
     const statusColors = {
       'Submitted': { bg: 'rgba(14,124,107,.12)', text: 'var(--ledger-deep)' },
@@ -79,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listEl.innerHTML = data.map(a => {
       const s = statusColors[a.status] || statusColors['Submitted'];
       return `
-      <div style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:2px; padding:12px 14px; gap:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); border-radius:2px; padding:12px 14px; gap:12px; background:var(--paper);">
         <div>
           <div style="font-weight:600; font-size:14px;">${a.job_title}</div>
           <div style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);">${a.job_category || ''} · Applied ${new Date(a.applied_at).toLocaleDateString()}</div>
@@ -135,6 +158,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ---------- populate editable sections from stored profile ----------
+  function fillProfileForm(profileData, resumeUrl){
+    document.getElementById('piName').value = profileData?.full_name || '';
+    document.getElementById('piCountry').value = profileData?.country || '';
+    document.getElementById('piPhone').value = profileData?.phone || '';
+    if (profileData?.category) document.getElementById('piCategory').value = profileData.category;
+    if (profileData?.years_experience) document.getElementById('piExperience').value = profileData.years_experience;
+    if (profileData?.availability) document.getElementById('piAvailability').value = profileData.availability;
+    document.getElementById('piLinkedin').value = profileData?.linkedin_url || '';
+    document.getElementById('piMessage').value = profileData?.cover_message || '';
+    document.getElementById('piPrevEmployment').value = profileData?.previous_employment || '';
+    document.getElementById('piEducation').value = profileData?.formal_education || '';
+
+    const docStatus = document.getElementById('docResumeStatus');
+    if (resumeUrl) {
+      docStatus.innerHTML = `<a href="${resumeUrl}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View current file →</a>`;
+    } else {
+      docStatus.textContent = 'No resume uploaded yet.';
+    }
+  }
+
   // ---------- account view ----------
   async function showAccount(user){
     formsView.style.display = 'none';
@@ -143,34 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     accountView.style.display = 'block';
 
     const { data: profileData } = await sb.from('profiles').select('*').eq('id', user.id).single();
-
-    document.getElementById('accEmail').textContent = user.email;
-    document.getElementById('accName').textContent = profileData?.full_name || '—';
-    document.getElementById('accCountry').textContent = profileData?.country || '—';
-    document.getElementById('accPhone').textContent = profileData?.phone || '—';
-    document.getElementById('accCategory').textContent = profileData?.category || '—';
-    document.getElementById('accExperience').textContent = profileData?.years_experience || '—';
-    document.getElementById('accAvailability').textContent = profileData?.availability || '—';
-    const linkedinEl = document.getElementById('accLinkedin');
-    if (profileData?.linkedin_url) {
-      linkedinEl.innerHTML = `<a href="${profileData.linkedin_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View profile →</a>`;
-    } else {
-      linkedinEl.textContent = '—';
-    }
-    const messageWrap = document.getElementById('accMessageWrap');
-    if (profileData?.cover_message) {
-      document.getElementById('accMessage').textContent = profileData.cover_message;
-      messageWrap.style.display = 'block';
-    } else {
-      messageWrap.style.display = 'none';
-    }
-    const resumeLine = document.getElementById('accResumeLine');
-    if (profileData?.resume_url) {
-      resumeLine.innerHTML = `<span>RESUME</span><a href="${profileData.resume_url}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View file →</a>`;
-    } else {
-      resumeLine.innerHTML = `<span>RESUME</span><span>Not uploaded</span>`;
-    }
-
+    fillProfileForm(profileData, profileData?.resume_url);
     await maybeShowApplyConfirm(user.id);
   }
 
@@ -197,18 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- log in ----------
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setLoading(loginForm, true, 'Log in');
+    setLoading(loginForm, true, 'Sign In');
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
 
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    setLoading(loginForm, false, 'Log in');
+    setLoading(loginForm, false, 'Sign In');
 
     if (error) {
       setStatus(loginForm, error.message, true);
       return;
     }
-    setStatus(loginForm, 'Logged in ✓', false);
     showAccount(data.user);
     loginForm.reset();
   });
@@ -216,24 +232,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- create profile (sign up) ----------
   signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setLoading(signupForm, true, 'Create profile');
 
+    const email = document.getElementById('suEmail').value.trim();
+    const emailConfirm = document.getElementById('suEmailConfirm').value.trim();
+    const password = document.getElementById('suPassword').value;
+    const passwordConfirm = document.getElementById('suPasswordConfirm').value;
     const fullName = document.getElementById('suName').value.trim();
     const country = document.getElementById('suCountry').value.trim();
-    const email = document.getElementById('suEmail').value.trim();
     const phone = document.getElementById('suPhone').value.trim();
     const category = document.getElementById('suCategory').value;
     const yearsExperience = document.getElementById('suExperience').value;
     const availability = document.getElementById('suAvailability').value;
     const linkedinUrl = document.getElementById('suLinkedin').value.trim();
     const coverMessage = document.getElementById('suMessage').value.trim();
-    const password = document.getElementById('suPassword').value;
     const resumeFile = document.getElementById('suResume').files[0];
+    const termsAccepted = document.getElementById('suTerms').checked;
+
+    if (email !== emailConfirm) {
+      setStatus(signupForm, 'Email addresses do not match.', true);
+      return;
+    }
+    if (!validatePassword(password)) {
+      setStatus(signupForm, 'Password does not meet the requirements above.', true);
+      return;
+    }
+    if (password !== passwordConfirm) {
+      setStatus(signupForm, 'Passwords do not match.', true);
+      return;
+    }
+    if (!termsAccepted) {
+      setStatus(signupForm, 'Please accept the data privacy statement to continue.', true);
+      return;
+    }
+
+    const submitBtn = signupForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Please wait…';
 
     const { data: signUpData, error: signUpError } = await sb.auth.signUp({ email, password });
 
     if (signUpError) {
-      setLoading(signupForm, false, 'Create profile');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Create Account';
       setStatus(signupForm, signUpError.message, true);
       return;
     }
@@ -265,15 +305,96 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    setLoading(signupForm, false, 'Create profile');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Create Account';
 
     if (signUpData.session) {
-      setStatus(signupForm, 'Profile created ✓', false);
       showAccount(user);
     } else {
-      setStatus(signupForm, 'Profile created — check your email to confirm your address, then log in.', false);
+      setStatus(signupForm, 'Account created — check your email to confirm your address, then sign in.', false);
     }
     signupForm.reset();
+  });
+
+  // ---------- save: Profile Information ----------
+  document.getElementById('saveProfileInfoBtn').addEventListener('click', async () => {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+    const btn = document.getElementById('saveProfileInfoBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+
+    const { error } = await sb.from('profiles').update({
+      full_name: document.getElementById('piName').value.trim(),
+      country: document.getElementById('piCountry').value.trim(),
+      phone: document.getElementById('piPhone').value.trim(),
+      category: document.getElementById('piCategory').value,
+      years_experience: document.getElementById('piExperience').value,
+      availability: document.getElementById('piAvailability').value,
+      linkedin_url: document.getElementById('piLinkedin').value.trim() || null,
+      cover_message: document.getElementById('piMessage').value.trim() || null
+    }).eq('id', user.id);
+
+    btn.disabled = false;
+    btn.textContent = error ? 'Save' : 'Saved ✓';
+    if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+  });
+
+  // ---------- save: My Documents (resume upload) ----------
+  document.getElementById('saveDocsBtn').addEventListener('click', async () => {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+    const file = document.getElementById('docResumeUpload').files[0];
+    if (!file) return;
+
+    const btn = document.getElementById('saveDocsBtn');
+    btn.disabled = true; btn.textContent = 'Uploading…';
+
+    const path = `${user.id}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await sb.storage.from('resumes').upload(path, file);
+
+    if (!uploadError) {
+      const { data: publicUrlData } = sb.storage.from('resumes').getPublicUrl(path);
+      await sb.from('profiles').update({ resume_url: publicUrlData.publicUrl }).eq('id', user.id);
+      document.getElementById('docResumeStatus').innerHTML = `<a href="${publicUrlData.publicUrl}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View current file →</a>`;
+      btn.textContent = 'Uploaded ✓';
+    } else {
+      btn.textContent = 'Upload';
+      alert("Couldn't upload file: " + uploadError.message);
+    }
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Upload'; }, 2000);
+  });
+
+  // ---------- save: Previous Employment ----------
+  document.getElementById('saveEmploymentBtn').addEventListener('click', async () => {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+    const btn = document.getElementById('saveEmploymentBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+
+    const { error } = await sb.from('profiles').update({
+      previous_employment: document.getElementById('piPrevEmployment').value.trim() || null
+    }).eq('id', user.id);
+
+    btn.disabled = false;
+    btn.textContent = error ? 'Save' : 'Saved ✓';
+    if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+  });
+
+  // ---------- save: Formal Education ----------
+  document.getElementById('saveEducationBtn').addEventListener('click', async () => {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return;
+    const btn = document.getElementById('saveEducationBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+
+    const { error } = await sb.from('profiles').update({
+      formal_education: document.getElementById('piEducation').value.trim() || null
+    }).eq('id', user.id);
+
+    btn.disabled = false;
+    btn.textContent = error ? 'Save' : 'Saved ✓';
+    if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
   });
 
   // ---------- log out ----------

@@ -10,6 +10,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  .pw-rules{background:var(--paper-raised); border:1px solid var(--line); border-radius:2px; padding:14px 16px; margin:-6px 0 4px; font-size:12.5px; color:var(--ink-soft);}
+  .pw-rules ul{margin:6px 0 0; padding-left:18px;}
+  .pw-rules li{margin-bottom:3px;}
+  .pw-rules li.ok{color:var(--ledger-deep);}
+  .check-row{display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:var(--ink-soft); margin-bottom:4px;}
+  .check-row input{margin-top:3px;}
+  .check-row a{color:var(--ledger); font-weight:600;}
+
+  .cp-intro{font-size:14.5px; color:var(--ink-soft); margin-bottom:24px; max-width:62ch;}
+  .cp-accordion details{border:1px solid var(--line); border-radius:2px; margin-bottom:10px; overflow:hidden;}
+  .cp-accordion summary{
+    list-style:none; cursor:pointer; padding:16px 18px; background:var(--ink); color:#fff;
+    display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:14.5px;
+  }
+  .cp-accordion summary::-webkit-details-marker{display:none;}
+  .cp-accordion summary .chev{font-family:'IBM Plex Mono',monospace; transition:transform .2s; font-weight:400;}
+  .cp-accordion details[open] summary .chev{transform:rotate(45deg);}
+  .cp-accordion summary .count-pill{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--ledger); color:#fff;
+    padding:2px 8px; border-radius:20px; margin-left:8px;
+  }
+  .cp-body{padding:22px 20px; background:var(--paper-raised);}
+  .cp-body textarea{min-height:120px;}
+</style>
 </head>
 <body>
 
@@ -77,39 +102,62 @@
 
           <form class="profile-form active" id="loginForm" data-form="login">
             <div class="field">
-              <label for="loginEmail">Email</label>
+              <label for="loginEmail">Email address</label>
               <input id="loginEmail" type="email" placeholder="you@email.com" required>
             </div>
             <div class="field">
               <label for="loginPassword">Password</label>
               <input id="loginPassword" type="password" placeholder="••••••••" required>
             </div>
-            <button type="submit" class="btn btn-primary">Log in</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
           </form>
 
-          <form class="profile-form" id="signupForm" data-form="signup">
+          <form class="profile-form" id="signupForm" data-form="signup" novalidate>
+            <p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 6px;">* Indicates a required field.</p>
+
+            <div class="field">
+              <label for="suEmail">Email address *</label>
+              <input id="suEmail" type="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="suEmailConfirm">Retype email address *</label>
+              <input id="suEmailConfirm" type="email" placeholder="you@email.com" required>
+            </div>
+
+            <div class="field">
+              <label for="suPassword">Choose password *</label>
+              <input id="suPassword" type="password" placeholder="••••••••" required>
+            </div>
+            <div class="pw-rules" id="pwRules">
+              <ul>
+                <li id="rule-len">Password must be at least 8 characters long.</li>
+                <li id="rule-max">Password must not be longer than 30 characters.</li>
+                <li id="rule-case">Password must contain at least one upper case and one lower case letter.</li>
+                <li id="rule-num">Password must contain at least one number or punctuation character.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <label for="suPasswordConfirm">Retype password *</label>
+              <input id="suPasswordConfirm" type="password" placeholder="••••••••" required>
+            </div>
+
             <div class="row2">
               <div class="field">
-                <label for="suName">Full name</label>
+                <label for="suName">Full name *</label>
                 <input id="suName" type="text" placeholder="Jane Doe" required>
               </div>
               <div class="field">
-                <label for="suCountry">Country</label>
+                <label for="suCountry">Country *</label>
                 <input id="suCountry" type="text" placeholder="Where you're based" required>
               </div>
             </div>
-            <div class="row2">
-              <div class="field">
-                <label for="suEmail">Email</label>
-                <input id="suEmail" type="email" placeholder="you@email.com" required>
-              </div>
-              <div class="field">
-                <label for="suPhone">Phone</label>
-                <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
-              </div>
-            </div>
             <div class="field">
-              <label for="suCategory">Role category you're interested in</label>
+              <label for="suPhone">Phone number</label>
+              <input id="suPhone" type="tel" placeholder="+1 000 000 0000">
+            </div>
+
+            <div class="field">
+              <label for="suCategory">Role category you're interested in *</label>
               <select id="suCategory">
                 <option>Bookkeeping (QBOA)</option>
                 <option>Call Center</option>
@@ -152,48 +200,146 @@
               <label for="suResume">Resume / CV</label>
               <input id="suResume" type="file">
             </div>
-            <div class="field">
-              <label for="suPassword">Create a password</label>
-              <input id="suPassword" type="password" placeholder="••••••••" required minlength="6">
+
+            <div style="margin:8px 0 4px;">
+              <label class="check-row"><input type="checkbox" id="suNotifJobs" checked> Receive new job posting notifications</label>
+              <label class="check-row"><input type="checkbox" id="suNotifCareer" checked> Hear more about career opportunities</label>
+              <label class="check-row"><input type="checkbox" id="suTerms" required> I have read and accept the <a href="#" onclick="return false;">data privacy statement</a> *</label>
             </div>
-            <button type="submit" class="btn btn-primary">Create profile</button>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
           </form>
         </div>
 
         <div id="accountView" style="display:none;">
           <span class="eyebrow">Logged in</span>
-          <h2 style="margin-top:10px;">Welcome back</h2>
+          <h1 style="margin-top:10px; font-size:30px;">Candidate Profile</h1>
+          <p class="cp-intro">Dear candidate, this is where you manage the details recruiters see when reviewing your application. Fill in as many sections as you can — a complete profile is far more likely to get noticed.</p>
 
-          <div id="applyConfirm" style="display:none; border:1px solid var(--ledger); background:var(--paper-raised); padding:16px 18px; border-radius:2px; margin:20px 0;">
+          <div id="applyConfirm" style="display:none; border:1px solid var(--ledger); background:var(--paper-raised); padding:16px 18px; border-radius:2px; margin-bottom:22px;">
             <p style="margin:0 0 10px; font-size:14.5px;">Apply to <strong id="applyConfirmTitle"></strong> with this profile?</p>
             <button id="applyConfirmBtn" class="btn btn-primary" style="padding:9px 18px; font-size:13px;">Confirm application</button>
           </div>
 
-          <div class="info-card" style="margin-top:22px; background:var(--ink);">
-            <span class="eyebrow" style="color:#6FE0C7;">Applicant profile</span>
-            <h3 id="accName" style="margin:14px 0 22px;">—</h3>
-            <div class="info-line"><span>EMAIL</span><span id="accEmail">—</span></div>
-            <div class="info-line"><span>COUNTRY</span><span id="accCountry">—</span></div>
-            <div class="info-line"><span>PHONE</span><span id="accPhone">—</span></div>
-            <div class="info-line"><span>CATEGORY</span><span id="accCategory">—</span></div>
-            <div class="info-line"><span>EXPERIENCE</span><span id="accExperience">—</span></div>
-            <div class="info-line"><span>AVAILABILITY</span><span id="accAvailability">—</span></div>
-            <div class="info-line"><span>LINKEDIN</span><span id="accLinkedin">—</span></div>
-            <div class="info-line" id="accResumeLine" style="border-bottom:none;"><span>RESUME</span><span>—</span></div>
-          </div>
-          <div id="accMessageWrap" style="display:none; margin-top:18px; padding:16px 18px; border:1px solid var(--line); border-radius:2px; background:var(--paper-raised);">
-            <span class="eyebrow">About you</span>
-            <p id="accMessage" style="margin:10px 0 0; font-size:14px; color:var(--ink-soft); white-space:pre-wrap;"></p>
+          <div class="cp-accordion">
+
+            <details open>
+              <summary>My Documents <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <div class="field">
+                  <label>Current resume / CV</label>
+                  <p id="docResumeStatus" style="font-size:14px; margin:4px 0 12px;">—</p>
+                </div>
+                <div class="field">
+                  <label for="docResumeUpload">Upload new resume / CV</label>
+                  <input id="docResumeUpload" type="file">
+                </div>
+                <button id="saveDocsBtn" class="btn btn-primary" style="padding:10px 20px; font-size:13.5px;">Upload</button>
+              </div>
+            </details>
+
+            <details>
+              <summary>Profile Information <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <div class="row2">
+                  <div class="field">
+                    <label for="piName">Full name</label>
+                    <input id="piName" type="text">
+                  </div>
+                  <div class="field">
+                    <label for="piCountry">Country</label>
+                    <input id="piCountry" type="text">
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="piPhone">Phone number</label>
+                  <input id="piPhone" type="tel">
+                </div>
+                <div class="field">
+                  <label for="piCategory">Role category</label>
+                  <select id="piCategory">
+                    <option>Bookkeeping (QBOA)</option>
+                    <option>Call Center</option>
+                    <option>Sales</option>
+                    <option>Healthcare Support</option>
+                    <option>Interpretation</option>
+                    <option>Other / Not sure yet</option>
+                  </select>
+                </div>
+                <div class="row2">
+                  <div class="field">
+                    <label for="piExperience">Years of experience</label>
+                    <select id="piExperience">
+                      <option>Less than 1 year</option>
+                      <option>1–2 years</option>
+                      <option>3–5 years</option>
+                      <option>6–10 years</option>
+                      <option>10+ years</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="piAvailability">Availability</label>
+                    <select id="piAvailability">
+                      <option>Full-time</option>
+                      <option>Part-time</option>
+                      <option>Contract</option>
+                      <option>Flexible</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="piLinkedin">LinkedIn or portfolio link</label>
+                  <input id="piLinkedin" type="url">
+                </div>
+                <div class="field">
+                  <label for="piMessage">A little about you</label>
+                  <textarea id="piMessage" rows="4"></textarea>
+                </div>
+                <button id="saveProfileInfoBtn" class="btn btn-primary" style="padding:10px 20px; font-size:13.5px;">Save</button>
+              </div>
+            </details>
+
+            <details>
+              <summary>Jobs Applied <span class="count-pill" id="jobsAppliedCount">0</span> <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <div id="applicationsList" style="display:flex; flex-direction:column; gap:10px;">
+                  <p style="color:var(--ink-soft); font-size:14px;">No applications yet.</p>
+                </div>
+              </div>
+            </details>
+
+            <details>
+              <summary>Saved Applications <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <p style="color:var(--ink-soft); font-size:14px; margin:0;">You haven't saved any applications yet. When browsing <a href="careers.html" style="color:var(--ledger); font-weight:600;">Careers</a>, you'll be able to save a role here to apply later.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Previous Employment <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <div class="field">
+                  <label for="piPrevEmployment">Describe your previous roles, employers, and dates</label>
+                  <textarea id="piPrevEmployment" rows="5" placeholder="e.g. Customer Service Rep, ABC Company, 2022–2024 — handled inbound support..."></textarea>
+                </div>
+                <button id="saveEmploymentBtn" class="btn btn-primary" style="padding:10px 20px; font-size:13.5px;">Save</button>
+              </div>
+            </details>
+
+            <details>
+              <summary>Formal Education <span class="chev">+</span></summary>
+              <div class="cp-body">
+                <div class="field">
+                  <label for="piEducation">Degrees, certifications, and schools</label>
+                  <textarea id="piEducation" rows="5" placeholder="e.g. Associate Degree in Accounting, Community College, 2021"></textarea>
+                </div>
+                <button id="saveEducationBtn" class="btn btn-primary" style="padding:10px 20px; font-size:13.5px;">Save</button>
+              </div>
+            </details>
+
           </div>
 
-          <div style="margin-top:26px;">
-            <span class="eyebrow">My applications</span>
-            <div id="applicationsList" style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
-              <p style="color:var(--ink-soft); font-size:14px;">No applications yet.</p>
-            </div>
-          </div>
-
-          <button id="logoutBtn" class="btn btn-ghost" style="margin-top:26px;">Log out</button>
+          <button id="logoutBtn" class="btn btn-ghost" style="margin-top:26px;">Sign Out</button>
         </div>
       </div>
     </div>

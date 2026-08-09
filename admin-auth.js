@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadApplications(){
     const { data, error } = await sb
       .from('applications')
-      .select('id, job_id, job_title, job_category, status, applied_at, profiles ( full_name, country, phone, category, years_experience, availability, linkedin_url, cover_message, resume_url )')
+      .select('id, job_id, job_title, job_category, status, applied_at, profiles ( full_name, country, phone, category, years_experience, availability, linkedin_url, cover_message, previous_employment, formal_education, resume_url )')
       .order('applied_at', { ascending: false });
 
     if (error) {
@@ -81,7 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${statusSelect}</td>
           <td style="white-space:nowrap;">${new Date(a.applied_at).toLocaleDateString()}</td>
         </tr>
-        ${p.cover_message ? `<tr><td colspan="9" style="background:var(--paper-raised); font-size:13px; color:var(--ink-soft); padding:10px 12px;"><strong>Note:</strong> ${p.cover_message}</td></tr>` : ''}
+        ${p.cover_message ? `<tr><td colspan="9" style="background:var(--paper-raised); font-size:13px; color:var(--ink-soft); padding:10px 12px;"><strong>About:</strong> ${p.cover_message}</td></tr>` : ''}
+        ${p.previous_employment ? `<tr><td colspan="9" style="background:var(--paper-raised); font-size:13px; color:var(--ink-soft); padding:10px 12px;"><strong>Employment:</strong> ${p.previous_employment}</td></tr>` : ''}
+        ${p.formal_education ? `<tr><td colspan="9" style="background:var(--paper-raised); font-size:13px; color:var(--ink-soft); padding:10px 12px;"><strong>Education:</strong> ${p.formal_education}</td></tr>` : ''}
       `;
     }).join('');
 
