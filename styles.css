@@ -223,6 +223,36 @@
   .cta-banner .btn-primary{background:var(--ledger); color:var(--ink); border-color:var(--ledger);}
   .cta-banner .btn-primary:hover{background:var(--ledger-deep); color:var(--white);}
 
+  /* ---------- CTA PRO (photo banner with trust stats) ---------- */
+  .cta-pro{
+    position:relative; border-radius:var(--radius); overflow:hidden;
+    display:grid; grid-template-columns:1.15fr .85fr; min-height:360px;
+  }
+  .cta-pro-photo{position:relative;}
+  .cta-pro-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cta-pro-photo::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(20,27,30,0) 0%, rgba(20,27,30,.55) 100%);}
+  .cta-pro-body{
+    background:var(--ink); color:var(--paper);
+    padding:48px 44px; display:flex; flex-direction:column; justify-content:center; gap:22px;
+  }
+  .cta-pro-body .eyebrow{color:#8FEFDB;}
+  .cta-pro-body .eyebrow::before{background:#8FEFDB; box-shadow:0 0 0 3px rgba(143,239,219,.25);}
+  .cta-pro-body h2{color:#fff; font-size:clamp(26px,3vw,36px); margin:0; max-width:16ch;}
+  .cta-pro-body p{color:#C9D6D3; font-size:15.5px; margin:0; max-width:42ch;}
+  .cta-pro-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:4px;}
+  .cta-pro .btn-primary{background:var(--ledger); color:var(--ink); border-color:var(--ledger);}
+  .cta-pro .btn-primary:hover{background:#8FEFDB; color:var(--ink);}
+  .cta-pro .btn-ghost{border-color:#fff; color:#fff;}
+  .cta-pro .btn-ghost:hover{background:#fff; color:var(--ink);}
+  .cta-pro-stats{display:flex; gap:28px; margin-top:14px; flex-wrap:wrap;}
+  .cta-pro-stats div{border-left:2px solid var(--ledger); padding-left:12px;}
+  .cta-pro-stats .stat-num{font-family:'Fraunces',serif; font-size:24px; font-weight:600; color:#fff; display:block; line-height:1.1;}
+  .cta-pro-stats .stat-label{font-size:11px; color:#9FB0AC; font-family:'IBM Plex Mono',monospace; letter-spacing:.05em;}
+  @media (max-width:900px){
+    .cta-pro{grid-template-columns:1fr;}
+    .cta-pro-photo{min-height:220px;}
+  }
+
   /* ---------- CONTACT ---------- */
   .contact-grid{display:grid; grid-template-columns:1fr .8fr; gap:56px;}
   form{display:grid; gap:16px;}
