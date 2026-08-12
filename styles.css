@@ -281,14 +281,14 @@
   footer .logo .mark{font-size:19px;}
   .foot-links{display:flex; gap:26px; flex-wrap:wrap;}
   .foot-links a{font-size:13.5px; text-decoration:none; color:var(--ink-soft);}
-  .foot-social{display:flex; gap:14px; align-items:center;}
+  .foot-social{display:flex; gap:16px; align-items:center;}
   .foot-social a{
     display:flex; align-items:center; justify-content:center;
-    width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+    width:48px; height:48px; border-radius:50%; border:1px solid var(--line);
     color:var(--ink-soft); transition:.2s;
   }
   .foot-social a:hover{background:var(--ink); border-color:var(--ink); color:var(--paper);}
-  .foot-social svg{width:17px; height:17px; fill:currentColor;}
+  .foot-social svg{width:24px; height:24px; fill:currentColor;}
   .foot-bottom{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
 
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
