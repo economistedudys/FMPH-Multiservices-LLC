@@ -48,14 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     box.style.marginTop = '4px';
   }
 
-  function setLoading(form, isLoading, label){
-    const btn = form.querySelector('button[type="submit"], button[type="button"].is-submit');
-    if (!btn) return;
-    btn.disabled = isLoading;
-    btn.textContent = isLoading ? 'Please wait…' : label;
-  }
-
-  // ---------- password rule validation (mirrors the visible rules list) ----------
   function validatePassword(pw){
     const rules = {
       len: pw.length >= 8,
@@ -71,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const pwField = document.getElementById('suPassword');
   if (pwField) pwField.addEventListener('input', () => validatePassword(pwField.value));
+
+  // ---------- ensure a profile row always exists for the logged-in user ----------
+  // This self-heals accounts created while email confirmation briefly blocked the
+  // original signup-time profile insert (the cause of "applications_candidate_id_fkey" errors).
+  async function ensureProfileRow(userId, extra = {}){
+    const { error } = await sb.from('profiles').upsert({ id: userId, ...extra }, { onConflict: 'id' });
+    return error;
+  }
 
   // ---------- applications list + jobs applied count ----------
   async function loadApplications(userId){
@@ -139,6 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyConfirmBtn.disabled = true;
     applyConfirmBtn.textContent = 'Submitting…';
 
+    // Self-heal: make sure a profiles row exists before inserting the application,
+    // otherwise the foreign key (applications.candidate_id -> profiles.id) fails.
+    await ensureProfileRow(user.id);
+
     const { error } = await sb.from('applications').insert({
       candidate_id: user.id,
       job_id: pending.id,
@@ -186,6 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyBanner.style.display = 'none';
     accountView.style.display = 'block';
 
+    // Self-heal on every login/session-restore: guarantees a profiles row exists
+    // even for accounts created before this fix, or interrupted mid-signup.
+    await ensureProfileRow(user.id);
+
     const { data: profileData } = await sb.from('profiles').select('*').eq('id', user.id).single();
     fillProfileForm(profileData, profileData?.resume_url);
     await maybeShowApplyConfirm(user.id);
@@ -214,12 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- log in ----------
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setLoading(loginForm, true, 'Sign In');
+    const btn = loginForm.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = 'Please wait…';
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
 
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    setLoading(loginForm, false, 'Sign In');
+    btn.disabled = false; btn.textContent = 'Sign In';
 
     if (error) {
       setStatus(loginForm, error.message, true);
@@ -281,16 +290,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = signUpData.user;
     let resumeUrl = null;
 
-    if (user && resumeFile) {
-      const path = `${user.id}/${Date.now()}-${resumeFile.name}`;
-      const { error: uploadError } = await sb.storage.from('resumes').upload(path, resumeFile);
-      if (!uploadError) {
-        const { data: publicUrlData } = sb.storage.from('resumes').getPublicUrl(path);
-        resumeUrl = publicUrlData.publicUrl;
+    // Only upload/write profile data now if we actually have a session
+    // (i.e. email confirmation is off). Otherwise this is done via
+    // ensureProfileRow() the first time the user successfully logs in.
+    if (user && signUpData.session) {
+      if (resumeFile) {
+        const path = `${user.id}/${Date.now()}-${resumeFile.name}`;
+        const { error: uploadError } = await sb.storage.from('resumes').upload(path, resumeFile);
+        if (!uploadError) {
+          const { data: publicUrlData } = sb.storage.from('resumes').getPublicUrl(path);
+          resumeUrl = publicUrlData.publicUrl;
+        }
       }
-    }
 
-    if (user) {
       await sb.from('profiles').upsert({
         id: user.id,
         full_name: fullName,
@@ -311,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (signUpData.session) {
       showAccount(user);
     } else {
-      setStatus(signupForm, 'Account created — check your email to confirm your address, then sign in.', false);
+      setStatus(signupForm, 'Account created — check your email to confirm your address, then sign in. You can fill in your profile details after logging in.', false);
     }
     signupForm.reset();
   });
@@ -323,7 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('saveProfileInfoBtn');
     btn.disabled = true; btn.textContent = 'Saving…';
 
-    const { error } = await sb.from('profiles').update({
+    const { error } = await sb.from('profiles').upsert({
+      id: user.id,
       full_name: document.getElementById('piName').value.trim(),
       country: document.getElementById('piCountry').value.trim(),
       phone: document.getElementById('piPhone').value.trim(),
@@ -332,11 +345,12 @@ document.addEventListener('DOMContentLoaded', () => {
       availability: document.getElementById('piAvailability').value,
       linkedin_url: document.getElementById('piLinkedin').value.trim() || null,
       cover_message: document.getElementById('piMessage').value.trim() || null
-    }).eq('id', user.id);
+    }, { onConflict: 'id' });
 
     btn.disabled = false;
     btn.textContent = error ? 'Save' : 'Saved ✓';
     if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+    else alert("Couldn't save: " + error.message);
   });
 
   // ---------- save: My Documents (resume upload) ----------
@@ -354,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!uploadError) {
       const { data: publicUrlData } = sb.storage.from('resumes').getPublicUrl(path);
-      await sb.from('profiles').update({ resume_url: publicUrlData.publicUrl }).eq('id', user.id);
+      await sb.from('profiles').upsert({ id: user.id, resume_url: publicUrlData.publicUrl }, { onConflict: 'id' });
       document.getElementById('docResumeStatus').innerHTML = `<a href="${publicUrlData.publicUrl}" target="_blank" rel="noopener" style="color:var(--ledger); font-weight:600;">View current file →</a>`;
       btn.textContent = 'Uploaded ✓';
     } else {
@@ -372,13 +386,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('saveEmploymentBtn');
     btn.disabled = true; btn.textContent = 'Saving…';
 
-    const { error } = await sb.from('profiles').update({
+    const { error } = await sb.from('profiles').upsert({
+      id: user.id,
       previous_employment: document.getElementById('piPrevEmployment').value.trim() || null
-    }).eq('id', user.id);
+    }, { onConflict: 'id' });
 
     btn.disabled = false;
     btn.textContent = error ? 'Save' : 'Saved ✓';
     if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+    else alert("Couldn't save: " + error.message);
   });
 
   // ---------- save: Formal Education ----------
@@ -388,13 +404,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('saveEducationBtn');
     btn.disabled = true; btn.textContent = 'Saving…';
 
-    const { error } = await sb.from('profiles').update({
+    const { error } = await sb.from('profiles').upsert({
+      id: user.id,
       formal_education: document.getElementById('piEducation').value.trim() || null
-    }).eq('id', user.id);
+    }, { onConflict: 'id' });
 
     btn.disabled = false;
     btn.textContent = error ? 'Save' : 'Saved ✓';
     if (!error) setTimeout(() => { btn.textContent = 'Save'; }, 2000);
+    else alert("Couldn't save: " + error.message);
   });
 
   // ---------- log out ----------
